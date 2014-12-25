@@ -1,7 +1,7 @@
 # .bash_profile
 
-# Dropboxの中の.bashrcを参照する
-source /Users/kyo-yamada/Dropbox/Personal/Dev/Dotfiles/.bashrc
+# .bashrcの参照
+source ~/.bashrc
 
 # rbenvのパス
 export PATH="$HOME/.rbenv/bin:$PATH"
