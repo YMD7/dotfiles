@@ -1,5 +1,3 @@
-# .bash_profile
-
 # .bashrcの参照
 source ~/.bashrc
 
