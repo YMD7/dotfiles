@@ -60,8 +60,6 @@ call dein#add('bronson/vim-trailing-whitespace')
 call dein#add('tpope/vim-endwise')
 "-- 自動補完
 call dein#add('Shougo/neocomplete.vim')
-"-- スニペット
-call dein#add('Shougo/neosnippet.vim')
 "-- Javascriptのシンタックスカラー
 call dein#add('jelera/vim-javascript-syntax')
 "-- css3のシンタックスカラー
@@ -70,8 +68,9 @@ call dein#add('hail2u/vim-css3-syntax')
 call dein#add('othree/html5.vim')
 "-- Emmet
 call dein#add('mattn/emmet-vim')
-"-- 括弧の自動挿入
-" call dein#add('cohama/lexima.vim')
+"-- JSONのダブルクォートが表示されない問題の回避
+call dein#add('elzr/vim-json')
+let g:vim_json_syntax_conceal = 0
 
 " You can specify revision/branch/tag.
 call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
