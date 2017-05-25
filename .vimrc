@@ -71,10 +71,7 @@ call dein#add('othree/html5.vim')
 "-- Emmet
 call dein#add('mattn/emmet-vim')
 "-- 括弧の自動挿入
-call dein#add('cohama/lexima.vim')
-"-- スニペット
-call dein#add('Shougo/neosnippet.vim')
-call dein#add('Shougo/neosnippet-snippets')
+" call dein#add('cohama/lexima.vim')
 
 " You can specify revision/branch/tag.
 call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
