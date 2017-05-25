@@ -68,6 +68,8 @@ call dein#add('hail2u/vim-css3-syntax')
 call dein#add('othree/html5.vim')
 "-- Emmet
 call dein#add('mattn/emmet-vim')
+"-- 括弧の自動挿入
+call dein#add('cohama/lexima.vim')
 "-- JSONのダブルクォートが表示されない問題の回避
 call dein#add('elzr/vim-json')
 let g:vim_json_syntax_conceal = 0
