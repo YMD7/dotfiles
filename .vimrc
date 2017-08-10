@@ -46,42 +46,42 @@ if dein#load_state('~/.vim')
   " Required:
   call dein#add('~/.vim/dein/repos/github.com/Shougo/dein.vim')
 
-	" Add or remove your plugins here:
-	call dein#add('Shougo/neosnippet.vim')
-	call dein#add('Shougo/neosnippet-snippets')
+  " Add or remove your plugins here:
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
 
-	"-- itg_flatのカラーテーマ
-	call dein#add('cdmedia/itg_flat_vim')
-	"-- コメントON/OFFを Ctrl+- で実行
-	call dein#add('tomtom/tcomment_vim')
-	"-- 行末の半角スペースを可視化
-	call dein#add('bronson/vim-trailing-whitespace')
-	"-- Rubyのend閉じを自動で挿入
-	call dein#add('tpope/vim-endwise')
-	"-- 自動補完
-	call dein#add('Shougo/neocomplete.vim')
-	"-- Javascriptのシンタックスカラー
-	call dein#add('jelera/vim-javascript-syntax')
-	"-- css3のシンタックスカラー
-	call dein#add('hail2u/vim-css3-syntax')
-	"-- html5のシンタックスカラー
-	call dein#add('othree/html5.vim')
-	"-- Emmet
-	call dein#add('mattn/emmet-vim')
-	"-- 括弧の自動挿入
-	call dein#add('cohama/lexima.vim')
-	"-- JSONのダブルクォートが表示されない問題の回避
-	call dein#add('elzr/vim-json')
-	let g:vim_json_syntax_conceal = 0
+  "-- itg_flatのカラーテーマ
+  call dein#add('cdmedia/itg_flat_vim')
+  "-- コメントON/OFFを Ctrl+- で実行
+  call dein#add('tomtom/tcomment_vim')
+  "-- 行末の半角スペースを可視化
+  call dein#add('bronson/vim-trailing-whitespace')
+  "-- Rubyのend閉じを自動で挿入
+  call dein#add('tpope/vim-endwise')
+  "-- 自動補完
+  call dein#add('Shougo/neocomplete.vim')
+  "-- Javascriptのシンタックスカラー
+  call dein#add('jelera/vim-javascript-syntax')
+  "-- css3のシンタックスカラー
+  call dein#add('hail2u/vim-css3-syntax')
+  "-- html5のシンタックスカラー
+  call dein#add('othree/html5.vim')
+  "-- Emmet
+  call dein#add('mattn/emmet-vim')
+  "-- 括弧の自動挿入
+  call dein#add('cohama/lexima.vim')
+  "-- JSONのダブルクォートが表示されない問題の回避
+  call dein#add('elzr/vim-json')
+  let g:vim_json_syntax_conceal = 0
   "-- Slimのシンタックス
   call dein#add('slim-template/vim-slim')
   autocmd BufNewFile,BufRead *.slim setlocal filetype=slim
 
-	" You can specify revision/branch/tag.
-	call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+  " You can specify revision/branch/tag.
+  call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 
-	" Required:
-	call dein#end()
+  " Required:
+  call dein#end()
 
 endif
 
