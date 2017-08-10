@@ -73,6 +73,9 @@ if dein#load_state('~/.vim')
 	"-- JSONのダブルクォートが表示されない問題の回避
 	call dein#add('elzr/vim-json')
 	let g:vim_json_syntax_conceal = 0
+  "-- Slimのシンタックス
+  call dein#add('slim-template/vim-slim')
+  autocmd BufNewFile,BufRead *.slim setlocal filetype=slim
 
 	" You can specify revision/branch/tag.
 	call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
