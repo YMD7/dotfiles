@@ -16,6 +16,7 @@ set smartindent "オートインデント
 set autoindent "新しい行のインデントを現在行と同じにする
 set number "行番号を表示する
 set showmatch "閉括弧が入力された時、対応する括弧を強調する
+source $VIMRUNTIME/macros/matchit.vim " Vimの「%」を拡張する
 set smarttab "新しい行を作った時に高度な自動インデントを行う
 set hidden "保存されてないファイルがあっても別ファイルを開ける
 set backspace=indent,eol,start "バックスペースで削除を有効化
@@ -76,6 +77,10 @@ if dein#load_state('~/.vim')
   "-- Slimのシンタックス
   call dein#add('slim-template/vim-slim')
   autocmd BufNewFile,BufRead *.slim setlocal filetype=slim
+  "-- インデントの可視化
+  call dein#add('Yggdroot/indentLine')
+  let g:indentLine_char = '│'
+  let g:indentLine_color_term = 236
 
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
