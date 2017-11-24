@@ -20,6 +20,8 @@ source $VIMRUNTIME/macros/matchit.vim " Vimの「%」を拡張する
 set smarttab "新しい行を作った時に高度な自動インデントを行う
 set hidden "保存されてないファイルがあっても別ファイルを開ける
 set backspace=indent,eol,start "バックスペースで削除を有効化
+set laststatus=2 "ステータスラインを表示
+set noshowmode "モードを非表示
 
 "### テーマ ###
 set background=dark
@@ -81,6 +83,11 @@ if dein#load_state('~/.vim')
   call dein#add('Yggdroot/indentLine')
   let g:indentLine_char = '│'
   let g:indentLine_color_term = 236
+  "-- ステータスラインのカスタマイズ
+  call dein#add('itchyny/lightline.vim')
+  let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
 
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
