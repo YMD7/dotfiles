@@ -42,8 +42,8 @@ endif
 set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('~/.vim')
-  call dein#begin('~/.vim')
+if dein#load_state('~/.vim/dein')
+  call dein#begin('~/.vim/dein')
 
   " Let dein manage dein
   " Required:
