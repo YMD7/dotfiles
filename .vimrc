@@ -88,9 +88,12 @@ if dein#load_state('~/.vim/dein')
   let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ }
+  "-- カーソル位置によって自動的に filetype を切り替え
+  call dein#add('Shougo/context_filetype.vim')
+  call dein#add('osyo-manga/vim-precious')
   "-- Vue Syntax
   call dein#add('posva/vim-vue')
-  autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+  autocmd BufRead,BufNewFile *.vue setlocal filetype=html
 
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
