@@ -88,6 +88,9 @@ if dein#load_state('~/.vim/dein')
   let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ }
+  "-- Vue Syntax
+  call dein#add('posva/vim-vue')
+  autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
