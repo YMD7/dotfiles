@@ -27,6 +27,14 @@ set noshowmode "モードを非表示
 set background=dark
 colorscheme itg_flat
 
+"### for vimdiff ###
+if &diff
+  highlight DiffAdd cterm=none ctermfg=green ctermbg=black
+  highlight DiffDelete cterm=none ctermfg=darkred ctermbg=black
+  highlight DiffChange cterm=none ctermfg=none ctermbg=black
+  highlight DiffText cterm=none ctermfg=black ctermbg=darkyellow
+endif
+
 "### 検索設定 ###
 set ignorecase "大文字/小文字の区別なく検索する
 set smartcase "検索文字列に大文字が含まれている場合は区別して検索する
