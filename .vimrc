@@ -73,6 +73,8 @@ if dein#load_state('~/.vim/dein')
   call dein#add('Shougo/neocomplete.vim')
   "-- Javascriptのシンタックスカラー
   call dein#add('jelera/vim-javascript-syntax')
+  "-- スニペット集
+  call dein#add('honza/vim-snippets')
   "-- css3のシンタックスカラー
   call dein#add('hail2u/vim-css3-syntax')
   "-- html5のシンタックスカラー
@@ -215,5 +217,7 @@ if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
 
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
 " Custom Snippets Directory
-let g:neosnippet#snippets_directory='~/.vim/dein/repos/github.com/Shougo/neosnippet-snippets/MySnippet'
+let g:neosnippet#snippets_directory='~/.vim/dein/snippets'
