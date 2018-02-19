@@ -40,6 +40,16 @@ set ignorecase "大文字/小文字の区別なく検索する
 set smartcase "検索文字列に大文字が含まれている場合は区別して検索する
 set wrapscan "検索時に最後まで行ったら最初に戻る
 
+"### for vim-anzu ###
+" mapping
+nmap n <Plug>(anzu-n-with-echo)
+nmap N <Plug>(anzu-N-with-echo)
+nmap * <Plug>(anzu-star-with-echo)
+nmap # <Plug>(anzu-sharp-with-echo)
+" clear status
+nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
+" statusline
+set statusline=%{anzu#search_status()}
 
 
 "dein Scripts-----------------------------
@@ -63,6 +73,8 @@ if dein#load_state('~/.vim/dein')
 
   "-- itg_flatのカラーテーマ
   call dein#add('cdmedia/itg_flat_vim')
+  "-- 検索時のマッチ情報を表示
+  call dein#add('osyo-manga/vim-anzu')
   "-- コメントON/OFFを Ctrl+- で実行
   call dein#add('tomtom/tcomment_vim')
   "-- 行末の半角スペースを可視化
