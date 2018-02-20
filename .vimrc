@@ -24,8 +24,8 @@ set laststatus=2 "ステータスラインを表示
 set noshowmode "モードを非表示
 
 "### テーマ ###
-set background=dark
-colorscheme itg_flat
+" colorscheme itg_flat
+colorscheme Tomorrow-Night-Bright
 
 "### for vimdiff ###
 if &diff
@@ -71,8 +71,9 @@ if dein#load_state('~/.vim/dein')
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
 
-  "-- itg_flatのカラーテーマ
+  "-- カラーテーマ
   call dein#add('cdmedia/itg_flat_vim')
+  call dein#add('chriskempson/vim-tomorrow-theme')
   "-- 検索時のマッチ情報を表示
   call dein#add('osyo-manga/vim-anzu')
   "-- コメントON/OFFを Ctrl+- で実行
