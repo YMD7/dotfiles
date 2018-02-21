@@ -86,6 +86,11 @@ if dein#load_state('~/.vim/dein')
   call dein#add('Shougo/neocomplete.vim')
   "-- surround テキストオブジェクトを追加する
   call dein#add('tpope/vim-surround')
+  "-- ALE (Asynchronous Lint Engine)
+  call dein#add('w0rp/ale')
+  let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+  nmap <silent> <C-j> <Plug>(ale_next_wrap)
+  nmap <silent> <C-k> <Plug>(ale_previous_wrap)
   "-- Javascriptのシンタックスカラー
   call dein#add('jelera/vim-javascript-syntax')
   "-- スニペット集
