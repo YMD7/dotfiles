@@ -84,6 +84,8 @@ if dein#load_state('~/.vim/dein')
   call dein#add('kana/vim-smartinput')
   "-- 自動補完
   call dein#add('Shougo/neocomplete.vim')
+  "-- surround テキストオブジェクトを追加する
+  call dein#add('tpope/vim-surround')
   "-- Javascriptのシンタックスカラー
   call dein#add('jelera/vim-javascript-syntax')
   "-- スニペット集
