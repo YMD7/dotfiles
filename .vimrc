@@ -80,8 +80,8 @@ if dein#load_state('~/.vim/dein')
   call dein#add('tomtom/tcomment_vim')
   "-- 行末の半角スペースを可視化
   call dein#add('bronson/vim-trailing-whitespace')
-  "-- Rubyのend閉じを自動で挿入
-  call dein#add('tpope/vim-endwise')
+  "-- 閉じタグとインデントの自動挿入
+  call dein#add('kana/vim-smartinput')
   "-- 自動補完
   call dein#add('Shougo/neocomplete.vim')
   "-- Javascriptのシンタックスカラー
