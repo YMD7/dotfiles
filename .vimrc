@@ -119,6 +119,9 @@ if dein#load_state('~/.vim/dein')
   "-- Vue Syntax
   call dein#add('posva/vim-vue')
   autocmd BufRead,BufNewFile *.vue setlocal filetype=html
+  "-- ファイルツリーの表示 <Ctrl + n> で表示/非表示
+  call dein#add('scrooloose/nerdtree')
+  map <C-n> :NERDTreeToggle<CR>
 
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
