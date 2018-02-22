@@ -12,8 +12,7 @@ syntax on "コードの色分け
 set expandtab "Tabキーを押したときにスペースを挿入
 set tabstop=2 "インデントの量
 set shiftwidth=2 "自動的に挿入されるスペースの量
-set smartindent "オートインデント
-set autoindent "新しい行のインデントを現在行と同じにする
+set cindent "スマートなインデント
 set number "行番号を表示する
 set showmatch "閉括弧が入力された時、対応する括弧を強調する
 source $VIMRUNTIME/macros/matchit.vim " Vimの「%」を拡張する
@@ -51,6 +50,14 @@ nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
 " statusline
 set statusline=%{anzu#search_status()}
 
+" Auto-complete XML/HTML Close Tag.
+augroup MyXML
+  autocmd!
+  autocmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
+  autocmd Filetype html inoremap <buffer> </ </<C-x><C-o>
+augroup END
+
+
 
 "dein Scripts-----------------------------
 if &compatible
@@ -80,8 +87,6 @@ if dein#load_state('~/.vim/dein')
   call dein#add('tomtom/tcomment_vim')
   "-- 行末の半角スペースを可視化
   call dein#add('bronson/vim-trailing-whitespace')
-  "-- 閉じタグとインデントの自動挿入
-  call dein#add('kana/vim-smartinput')
   "-- 自動補完
   call dein#add('Shougo/neocomplete.vim')
   "-- surround テキストオブジェクトを追加する
@@ -102,7 +107,7 @@ if dein#load_state('~/.vim/dein')
   "-- Emmet
   call dein#add('mattn/emmet-vim')
   "-- 括弧の自動挿入
-  call dein#add('cohama/lexima.vim')
+  " call dein#add('cohama/lexima.vim')
   "-- JSONのダブルクォートが表示されない問題の回避
   call dein#add('elzr/vim-json')
   let g:vim_json_syntax_conceal = 0
@@ -218,13 +223,6 @@ endif
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
-" Auto-complete XML/HTML Close Tag.
-augroup MyXML
-  autocmd!
-  autocmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
-  autocmd Filetype html inoremap <buffer> </ </<C-x><C-o>
-augroup END
-
 "========= neosnippet setting ========
 " Plugin key-mappings.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
@@ -251,3 +249,24 @@ endif
 let g:neosnippet#enable_snipmate_compatibility = 1
 " Custom Snippets Directory
 let g:neosnippet#snippets_directory='~/.vim/dein/snippets'
+
+" === neocompleteの候補が表示されてなかったらリターンで
+" htmlタグの改行とインデント
+function! Expander()
+  let line   = getline(".")
+  let col    = col(".")
+  let first  = line[col-2]
+  let second = line[col-1]
+  let third  = line[col]
+
+  if first ==# ">"
+    if second ==# "<" && third ==# "/"
+      return "\<CR>\<C-o>==\<C-o>O"
+    else
+      return "\<CR>"
+    endif
+  else
+    return "\<CR>"
+  endif
+endfunction
+inoremap <expr><CR> !pumvisible() ? Expander() : "<CR>"
