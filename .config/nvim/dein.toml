@@ -1,0 +1,59 @@
+# プラグイン管理
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+# スニペットライブラリ
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+# テーマ
+[[plugins]]
+repo = 'chriskempson/tomorrow-theme'
+
+# インデントの可視化
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+hook_add = '''
+  let g:indentLine_char = '│'
+  let g:indentLine_color_term = 236
+'''
+
+# 行末の半角スペースを可視化
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+
+# コメントON/OFFを Ctrl+- で実行
+[[plugins]]
+repo = 'tomtom/tcomment_vim'
+
+# surround テキストオブジェクトの追加する
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+# Emmet
+[[plugins]]
+repo = 'mattn/emmet-vim'
+
+# カーソル位置によって自動的に filetype を切り替え
+[[plugins]]
+repo = 'osyo-manga/vim-precious'
+depends = ['context_filetype.vim']
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+# ステータスラインのカスタマイズ
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = 'let g:lightline = { "colorscheme": "wombat" }'
+
+# 検索時のマッチ情報を表示
+[[plugins]]
+repo = 'osyo-manga/vim-anzu'
+
+# TernJS
+[[plugins]]
+repo = 'carlitux/deoplete-ternjs'
+hook_post_update = '''
+  let g:dein#plugin.build = 'npm install -g tern'
+'''
+
