@@ -11,6 +11,8 @@ repo = 'Shougo/neosnippet-snippets'
 repo = 'chriskempson/tomorrow-theme'
 
 # インデントの可視化
+#-- ON/OFF のトグル
+#-- :IndentLinesToggle
 [[plugins]]
 repo = 'Yggdroot/indentLine'
 hook_add = '''
@@ -56,4 +58,8 @@ repo = 'carlitux/deoplete-ternjs'
 hook_post_update = '''
   let g:dein#plugin.build = 'npm install -g tern'
 '''
+
+# Markdown
+[[plugins]]
+repo = 'tpope/vim-markdown'
 
