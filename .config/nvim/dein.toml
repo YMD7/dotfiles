@@ -63,3 +63,15 @@ hook_post_update = '''
 [[plugins]]
 repo = 'tpope/vim-markdown'
 
+# Vue Syntax
+[[plugins]]
+repo = 'posva/vim-vue'
+
+# Pug Syntax
+[[plugins]]
+repo = 'digitaltoad/vim-pug'
+
+# Stylus Syntax
+[[plugins]]
+repo = 'wavded/vim-stylus'
+
