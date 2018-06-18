@@ -64,6 +64,7 @@ set expandtab "Tabキーを押したときにスペースを挿入
 set shiftwidth=2 "自動的に挿入されるスペースの量
 set showmatch "閉括弧が入力された時、対応する括弧を強調する
 set hidden "保存されてないファイルがあっても別ファイルを開ける
+set clipboard=unnamed "ヤンクしたテキストをそのままクリップボードにコピー
 
 "### Searching ###
 set nohlsearch
