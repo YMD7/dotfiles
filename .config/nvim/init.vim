@@ -12,6 +12,7 @@ augroup END
 let g:python_host_prog = ''
 let g:python3_host_prog = system('echo -n "$(pyenv which python3)"')
 
+
 "### Auto install itself
 let s:dein_dir = expand('~/.vim/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
@@ -56,7 +57,6 @@ syntax on "コードの色分け
 set title "編集中のファイル名を表示
 set number "行番号を表示する
 set laststatus=2 "ステータスラインを表示
-set noshowmode "モードを非表示（lightline が代替）
 
 "### Editing ###
 set tabstop=2 "インデントの量
@@ -110,11 +110,15 @@ function! Expander()
 endfunction
 inoremap <expr><CR> Expander()
 
-" "### for vim-anzu ###
+"### for vim-anzu ###
 nmap n <Plug>(anzu-n-with-echo)
 nmap N <Plug>(anzu-N-with-echo)
 nmap * <Plug>(anzu-star-with-echo)
 nmap # <Plug>(anzu-sharp-with-echo)
 nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
 set statusline=%{anzu#search_status()}
+
+"### JSON ファイルを開くときは indentLine を OFFにする
+"ダブルクオーテーションの非表示バグ対策
+autocmd Filetype json let g:indentLine_enabled = 0
 

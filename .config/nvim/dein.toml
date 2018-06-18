@@ -11,14 +11,16 @@ repo = 'Shougo/neosnippet-snippets'
 repo = 'chriskempson/tomorrow-theme'
 
 # インデントの可視化
-#-- ON/OFF のトグル
-#-- :IndentLinesToggle
 [[plugins]]
 repo = 'Yggdroot/indentLine'
 hook_add = '''
   let g:indentLine_char = '│'
   let g:indentLine_color_term = 236
 '''
+
+# JSON
+[[plugins]]
+repo = 'elzr/vim-json'
 
 # 行末の半角スペースを可視化
 [[plugins]]
@@ -59,7 +61,15 @@ hook_post_update = '''
   let g:dein#plugin.build = 'npm install -g tern'
 '''
 
-# Markdown
+# Vue Syntax
 [[plugins]]
-repo = 'tpope/vim-markdown'
+repo = 'posva/vim-vue'
+
+# Pug Syntax
+[[plugins]]
+repo = 'digitaltoad/vim-pug'
+
+# Stylus Syntax
+[[plugins]]
+repo = 'wavded/vim-stylus'
 
