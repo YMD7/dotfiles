@@ -46,9 +46,9 @@ endif
 " Vim
 "============================================
 "### Initialize ###
-lang en_US
+lang en_US.UTF-8
 set encoding=utf-8
-set fileencodings=utf-8
+set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
 set fileformats=unix,dos,mac
 filetype plugin indent on
 
@@ -65,6 +65,7 @@ set expandtab "Tabキーを押したときにスペースを挿入
 set shiftwidth=2 "自動的に挿入されるスペースの量
 set showmatch "閉括弧が入力された時、対応する括弧を強調する
 set hidden "保存されてないファイルがあっても別ファイルを開ける
+set clipboard+=unnamedplus "ヤンクしたテキストをそのままクリップボードにコピー
 
 "### Searching ###
 set nohlsearch
