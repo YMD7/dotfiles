@@ -57,6 +57,7 @@ syntax on "コードの色分け
 set title "編集中のファイル名を表示
 set number "行番号を表示する
 set laststatus=2 "ステータスラインを表示
+let g:vim_json_syntax_conceal=0 "JSON のダブルクォーテーションの非表示化を無効にする
 
 "### Editing ###
 set tabstop=2 "インデントの量
