@@ -59,6 +59,8 @@ set number "行番号を表示する
 set laststatus=2 "ステータスラインを表示
 
 "### Editing ###
+map <F1> <Esc> "F1キーをヘルプのショートカットから Esc にリマップ
+imap <F1> <Esc> "F1キーをヘルプのショートカットから Esc にリマップ
 set tabstop=2 "インデントの量
 set expandtab "Tabキーを押したときにスペースを挿入
 set shiftwidth=2 "自動的に挿入されるスペースの量
