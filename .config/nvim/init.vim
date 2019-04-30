@@ -125,3 +125,8 @@ set statusline=%{anzu#search_status()}
 "ダブルクオーテーションの非表示バグ対策
 autocmd Filetype json let g:indentLine_enabled = 0
 
+"### filetype によってインデントを切り替える
+augroup IndentByFileType
+    autocmd!
+    autocmd BufRead,BufNewFile *.go setlocal noexpandtab "Go はインデントをハードタブにする
+augroup END
