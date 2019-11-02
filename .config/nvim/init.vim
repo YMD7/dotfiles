@@ -121,9 +121,11 @@ nmap # <Plug>(anzu-sharp-with-echo)
 nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
 set statusline=%{anzu#search_status()}
 
-"### JSON ファイルを開くときは indentLine を OFFにする
-"ダブルクオーテーションの非表示バグ対策
+"### JSON, Markdown ファイルを開くときは indentLine を OFFにする
+"ダブルクオーテーションやアスタリスクの非表示対策
 autocmd Filetype json let g:indentLine_enabled = 0
+autocmd Filetype markdown let g:indentLine_enabled = 0
+au FileType markdown set conceallevel=0
 
 "### filetype によってインデントを切り替える
 augroup IndentByFileType
