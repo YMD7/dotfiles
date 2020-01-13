@@ -59,6 +59,10 @@ set number "行番号を表示する
 set laststatus=2 "ステータスラインを表示
 let g:vim_json_syntax_conceal=0 "JSON のダブルクォーテーションの非表示化を無効にする
 
+"### Buffer ###
+nnoremap <silent> <C-j> :bprev<CR>
+nnoremap <silent> <C-k> :bnext<CR>
+
 "### Editing ###
 map <F1> <Esc> "F1キーをヘルプのショートカットから Esc にリマップ
 imap <F1> <Esc> "F1キーをヘルプのショートカットから Esc にリマップ
