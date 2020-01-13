@@ -2,6 +2,10 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
+# Submode
+[[plugins]]
+repo = 'kana/vim-submode'
+
 # スニペットライブラリ
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'

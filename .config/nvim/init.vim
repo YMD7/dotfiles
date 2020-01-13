@@ -63,6 +63,20 @@ let g:vim_json_syntax_conceal=0 "JSON のダブルクォーテーションの非
 nnoremap <silent> <C-j> :bprev<CR>
 nnoremap <silent> <C-k> :bnext<CR>
 
+"### Screen ###
+nnoremap mj <C-w>j
+nnoremap mk <C-w>k
+nnoremap ml <C-w>l
+nnoremap mh <C-w>h
+call submode#enter_with('bufmove', 'n', '', 'm>', '<C-w>>')
+call submode#enter_with('bufmove', 'n', '', 'm<', '<C-w><')
+call submode#enter_with('bufmove', 'n', '', 'm+', '<C-w>+')
+call submode#enter_with('bufmove', 'n', '', 'm-', '<C-w>-')
+call submode#map('bufmove', 'n', '', '>', '<C-w>>')
+call submode#map('bufmove', 'n', '', '<', '<C-w><')
+call submode#map('bufmove', 'n', '', '+', '<C-w>+')
+call submode#map('bufmove', 'n', '', '-', '<C-w>-')
+
 "### Editing ###
 map <F1> <Esc> "F1キーをヘルプのショートカットから Esc にリマップ
 imap <F1> <Esc> "F1キーをヘルプのショートカットから Esc にリマップ
