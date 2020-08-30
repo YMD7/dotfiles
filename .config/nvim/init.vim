@@ -9,9 +9,8 @@ augroup MyAutoCmd
   autocmd!
 augroup END
 
-let g:python_host_prog = ''
-let g:python3_host_prog = system('echo -n "$(pyenv which python3)"')
-
+let g:python_host_prog   = $PYENV_ROOT.'/versions/py2nvim/bin/python'
+let g:python3_host_prog  = $PYENV_ROOT.'/versions/py3nvim/bin/python'
 
 "### Auto install itself
 let s:dein_dir = expand('~/.vim/dein')
@@ -25,9 +24,10 @@ let &runtimepath = s:dein_repo_dir .",". &runtimepath
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  call dein#add('roxma/nvim-yarp')
-  call dein#add('roxma/vim-hug-neovim-rpc')
-  let g:deoplete#enable_yarp = 1
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
 
   let s:toml_dir = expand('~/.config/nvim')
   call dein#load_toml(s:toml_dir . '/dein.toml', { 'lazy': 0 })
@@ -64,14 +64,14 @@ nnoremap <silent> <C-j> :bprev<CR>
 nnoremap <silent> <C-k> :bnext<CR>
 
 "### Screen ###
-nnoremap mj <C-w>j
-nnoremap mk <C-w>k
-nnoremap ml <C-w>l
-nnoremap mh <C-w>h
-call submode#enter_with('bufmove', 'n', '', 'm>', '<C-w>>')
-call submode#enter_with('bufmove', 'n', '', 'm<', '<C-w><')
-call submode#enter_with('bufmove', 'n', '', 'm+', '<C-w>+')
-call submode#enter_with('bufmove', 'n', '', 'm-', '<C-w>-')
+nnoremap tj <C-w>j
+nnoremap tk <C-w>k
+nnoremap tl <C-w>l
+nnoremap th <C-w>h
+call submode#enter_with('bufmove', 'n', '', 't>', '<C-w>>')
+call submode#enter_with('bufmove', 'n', '', 't<', '<C-w><')
+call submode#enter_with('bufmove', 'n', '', 't+', '<C-w>+')
+call submode#enter_with('bufmove', 'n', '', 't-', '<C-w>-')
 call submode#map('bufmove', 'n', '', '>', '<C-w>>')
 call submode#map('bufmove', 'n', '', '<', '<C-w><')
 call submode#map('bufmove', 'n', '', '+', '<C-w>+')

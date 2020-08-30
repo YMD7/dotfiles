@@ -61,8 +61,8 @@ repo = 'osyo-manga/vim-anzu'
 # TernJS
 [[plugins]]
 repo = 'carlitux/deoplete-ternjs'
-hook_post_update = '''
-  let g:dein#plugin.build = 'npm install -g tern'
+hook_add = '''
+  let g:deoplete#sources#ternjs#tern_bin = system('echo -n "$(nodenv which tern)"')
 '''
 
 # Vue Syntax
