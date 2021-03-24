@@ -7,6 +7,11 @@ alias co='git checkout'
 
 PS1="[%n@Local %~] "
 
+# Homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# anyenv
+export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
 
 # XDG base directory specification
