@@ -9,8 +9,13 @@ augroup MyAutoCmd
   autocmd!
 augroup END
 
-let g:python_host_prog   = $PYENV_ROOT.'/versions/py2nvim/bin/python'
-let g:python3_host_prog  = $PYENV_ROOT.'/versions/py3nvim/bin/python'
+"### for Intel Mac
+"let g:python_host_prog   = $PYENV_ROOT.'/versions/py2nvim/bin/python'
+"let g:python3_host_prog  = $PYENV_ROOT.'/versions/py3nvim/bin/python'
+
+"### for Arm Mac
+let g:python_host_prog   = '/usr/bin/python'
+let g:python3_host_prog  = $PYENV_ROOT.'/versions/3.9.1/bin/python'
 
 "### Auto install itself
 let s:dein_dir = expand('~/.vim/dein')

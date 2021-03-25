@@ -14,6 +14,9 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
 
+# pip2
+export PATH="$PATH:/Users/kyo/Library/Python/2.7/bin"
+
 # XDG base directory specification
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"
