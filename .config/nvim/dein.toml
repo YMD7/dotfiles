@@ -77,3 +77,9 @@ repo = 'digitaltoad/vim-pug'
 [[plugins]]
 repo = 'wavded/vim-stylus'
 
+# Dart
+[[plugins]]
+repo = 'dart-lang/dart-vim-plugin'
+[[plugins]]
+repo = 'thosakwe/vim-flutter'
+
