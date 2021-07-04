@@ -15,6 +15,7 @@ hook_add = '''
 '''
 hook_source = '''
   highlight ALEError ctermbg=52
+  highlight SpellCap ctermbg=0
 '''
 
 # スニペット
@@ -36,14 +37,14 @@ depends = ['neosnippet-snippets']
 # 自動補完
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
-hook_source = '''
-  call deoplete#custom#option('num_processes', 1)
-'''
 hook_add = '''
   let g:deoplete#enable_at_startup = 1
   inoremap <expr><tab> pumvisible() ? "\<C-n>" :
         \ neosnippet#expandable_or_jumpable() ?
         \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
+'''
+hook_post_source = '''
+  call deoplete#custom#option('num_processes', 4)
 '''
 on_i = 1
 
