@@ -36,6 +36,9 @@ depends = ['neosnippet-snippets']
 # 自動補完
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
+hook_source = '''
+  call deoplete#custom#option('num_processes', 1)
+'''
 hook_add = '''
   let g:deoplete#enable_at_startup = 1
   inoremap <expr><tab> pumvisible() ? "\<C-n>" :
