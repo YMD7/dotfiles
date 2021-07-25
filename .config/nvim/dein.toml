@@ -38,6 +38,10 @@ repo = 'tomtom/tcomment_vim'
 [[plugins]]
 repo = 'tpope/vim-surround'
 
+# マルチカーソル
+[[plugins]]
+repo = 'mg979/vim-visual-multi'
+
 # Emmet
 [[plugins]]
 repo = 'mattn/emmet-vim'
