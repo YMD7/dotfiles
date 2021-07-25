@@ -2,7 +2,7 @@
 [[plugins]]
 repo = 'scrooloose/nerdtree'
 hook_add = '''
-  map <C-n> :NERDTreeToggle<CR>
+  map <C-f> :NERDTreeToggle<CR>
 '''
 
 # ALE (Asynchronous Lint Engine)
