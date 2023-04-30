@@ -62,6 +62,7 @@ syntax on "コードの色分け
 set title "編集中のファイル名を表示
 set number "行番号を表示する
 set laststatus=2 "ステータスラインを表示
+set mouse= "クリックでのカーソル移動を無効化
 let g:vim_json_syntax_conceal=0 "JSON のダブルクォーテーションの非表示化を無効にする
 
 "### Buffer ###
@@ -155,3 +156,16 @@ augroup IndentByFileType
     autocmd!
     autocmd BufRead,BufNewFile *.go setlocal noexpandtab "Go はインデントをハードタブにする
 augroup END
+
+"### Tabnine ###
+lua <<EOF
+require('tabnine').setup({
+  disable_auto_comment=true,
+  accept_keymap="<Tab>",
+  dismiss_keymap = "<C-]>",
+  debounce_ms = 800,
+  suggestion_color = {gui = "#808080", cterm = 244},
+  exclude_filetypes = {"TelescopePrompt"},
+  log_file_path = nil, -- absolute path to Tabnine log file
+})
+EOF

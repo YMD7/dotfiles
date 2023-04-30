@@ -53,3 +53,9 @@ on_i = 1
 repo = 'cohama/lexima.vim'
 on_i = 1
 
+# Tabnine
+[[plugins]]
+repo = 'codota/tabnine-nvim'
+hook_post_update = '''
+  call system('./dl_binaries.sh')
+'''
