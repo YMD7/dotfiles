@@ -2,6 +2,10 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
+# LSP Config
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+
 # Submode
 [[plugins]]
 repo = 'kana/vim-submode'
@@ -72,6 +76,10 @@ hook_add = '''
 # Vue Syntax
 [[plugins]]
 repo = 'posva/vim-vue'
+
+# Svelte Syntax
+[[plugins]]
+repo = 'evanleck/vim-svelte'
 
 # Pug Syntax
 [[plugins]]
