@@ -3,7 +3,11 @@ return {
   {
     -- Fern
     'lambdalisue/fern.vim',
-    keys = {{'<C-f>', '<cmd>Fern . -drawer -toggle<CR>'}},
+
+    keys = {
+      {'<C-f>', '<cmd>Fern . -drawer<CR>'},
+    },
+
     config = function()
       vim.g['fern#default_hidden'] = 1
     end,
