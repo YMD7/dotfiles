@@ -3,6 +3,10 @@
 General Settings
 =======================
 ]]
+-- disable unnecessary settings
+-- // default vim filer
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- encoding
 vim.env.LANG = 'en_US.UTF-8'
@@ -12,6 +16,7 @@ vim.o.encofing = 'utf-8'
 vim.o.title = true
 vim.o.number = true
 vim.o.mouse = false
+vim.opt.termguicolors = true
 
 -- buffer
 -- // Control + j/k to switch buffer
@@ -30,9 +35,6 @@ vim.o.hlsearch = false -- don't highlight matches
 vim.o.ignorecase = true -- ignore case letters when searching
 vim.o.smartcase = true -- ignore lowercase for the whole pattern
 vim.o.wrapscan = true -- search wraps around the end of the file
-
--- colorscheme
-vim.cmd('colorscheme Tomorrow-Night-Bright')
 
 
 
