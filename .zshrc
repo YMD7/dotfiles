@@ -8,7 +8,7 @@ alias co='git checkout'
 PS1="[%n@Local %~] "
 
 # ssh agent
-ssh-add -K
+ssh-add --apple-use-keychain
 
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
