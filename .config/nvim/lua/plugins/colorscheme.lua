@@ -29,6 +29,8 @@ return {
     "AlessandroYorba/Alduin",
     config = function()
       vim.g.alduin_Shout_Become_Ethereal = 1
+      -- vim.g.alduin_Shout_Dragon_Aspect = 1
+      -- vim.g.alduin_Shout_Fire_Breath = 1
       vim.cmd("colorscheme alduin")
     end,
   },
