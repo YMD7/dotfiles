@@ -14,4 +14,10 @@ return {
     -- //Key: [\sip] for fixing whitespace
     'ntpeters/vim-better-whitespace',
   },
+
+  {
+    -- multi cursor
+    -- //Key: [Ctrl-N] for multi selection
+    'mg979/vim-visual-multi',
+  },
 }
