@@ -17,6 +17,10 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
 
+# Node.js
+NODE_PATH="$(npm root -g)"
+export NODE_PATH="$NODE_PATH"
+
 # pip2
 export PATH="$PATH:/Users/kyo/Library/Python/2.7/bin"
 
@@ -26,4 +30,4 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 # Flutter
-export PATH="$PATH:$HOME/Dev/flutter/bin"
+export PATH="$HOME/.local/share/flutter/bin:$PATH"
