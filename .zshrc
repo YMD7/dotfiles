@@ -16,6 +16,10 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # anyenv
 eval "$(anyenv init -)"
 
+# Node.js
+NODE_PATH="$(npm root -g)"
+export NODE_PATH="$NODE_PATH"
+
 # pip2
 export PATH="$PATH:/Users/kyo/Library/Python/2.7/bin"
 
