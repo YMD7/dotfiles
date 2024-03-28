@@ -14,7 +14,6 @@ ssh-add --apple-use-keychain
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # anyenv
-export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
 
 # pip2
@@ -26,4 +25,4 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 # Flutter
-export PATH="$PATH:$HOME/Dev/flutter/bin"
+export PATH="$HOME/.local/share/flutter/bin:$PATH"
