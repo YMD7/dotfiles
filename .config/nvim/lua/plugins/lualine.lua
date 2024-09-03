@@ -13,6 +13,9 @@ return {
           -- Theme
           theme = 'gruvbox-material'
         },
+        sections = {
+          lualine_c = {{'filename', path = 2}}
+        },
       })
     end,
   },

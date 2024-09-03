@@ -10,12 +10,12 @@ vim.g.loaded_netrwPlugin = 1
 
 -- encoding
 vim.env.LANG = 'en_US.UTF-8'
-vim.o.encofing = 'utf-8'
+vim.o.encoding = 'utf-8'
 
 -- visual
 vim.o.title = true
 vim.o.number = true
-vim.o.mouse = false
+vim.o.mouse = ''
 vim.opt.termguicolors = true
 
 -- buffer
@@ -29,6 +29,7 @@ vim.o.expandtab = true -- use spaces instead of tabs
 vim.o.shiftwidth = 2 -- number of spaces to use for autoindent
 vim.o.showmatch = true -- highlight matching [{()}]
 vim.opt.clipboard:append{"unnamedplus"} -- enable sharing OS clipboard
+vim.g.vim_json_syntax_conceal = 0 -- JSON のダブルクォーテーションの非表示化を無効にする
 
 -- search
 vim.o.hlsearch = false -- don't highlight matches

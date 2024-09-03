@@ -8,6 +8,11 @@ return {
 
       local lspconfig = require("lspconfig")
 
+      -- ESLint
+      lspconfig.eslint.setup {
+        on_attach = on_attach,
+      }
+
       -- Deno
       lspconfig.denols.setup {
         on_attach = on_attach,
