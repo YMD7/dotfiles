@@ -27,6 +27,7 @@ vim.api.nvim_set_keymap("n", "<C-k>", ":bnext<CR>", { noremap = true, silent = t
 vim.o.tabstop = 2 -- number of visual spaces per TAB
 vim.o.expandtab = true -- use spaces instead of tabs
 vim.o.shiftwidth = 2 -- number of spaces to use for autoindent
+vim.o.smartindent = true -- indent a new line
 vim.o.showmatch = true -- highlight matching [{()}]
 vim.opt.clipboard:append{"unnamedplus"} -- enable sharing OS clipboard
 vim.g.vim_json_syntax_conceal = 0 -- JSON のダブルクォーテーションの非表示化を無効にする
@@ -58,4 +59,3 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
-
