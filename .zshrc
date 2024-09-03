@@ -14,7 +14,6 @@ ssh-add --apple-use-keychain
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # anyenv
-export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
 
 # Node.js
