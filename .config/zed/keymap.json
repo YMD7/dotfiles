@@ -16,6 +16,12 @@
     "bindings": {}
   },
   {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-f": "project_panel::ToggleFocus"
+    }
+  },
+  {
     "context": "Editor",
     "bindings": {
       "ctrl-f": "project_panel::ToggleFocus"
