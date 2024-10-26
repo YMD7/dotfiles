@@ -30,3 +30,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 
 # Flutter
 export PATH="$HOME/.local/share/flutter/bin:$PATH"
+
+# Rust
+export PATH="$HOME/.cargo/bin:$PATH"
+
