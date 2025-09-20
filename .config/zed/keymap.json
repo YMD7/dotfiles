@@ -6,33 +6,34 @@
 // To see the default key bindings run `zed: open default keymap`
 // from the command palette.
 [
-  {
-    "bindings": {
-      "cmd-escape": "workspace::ToggleZoom"
-    }
-  },
-  {
-    "context": "Workspace",
-    "bindings": {
-      "ctrl-f": "project_panel::ToggleFocus"
-    }
-  },
-  {
-    "context": "Editor",
-    "bindings": {
-      "ctrl-f": "project_panel::ToggleFocus"
-    }
-  },
-  {
-    "context": "ProjectPanel && not_editing",
-    "bindings": {
-      "l": "project_panel::Open"
-    }
-  },
-  {
-    "context": "Terminal",
-    "bindings": {
-      "cmd-n": "workspace::NewTerminal"
-    }
-  }
+	{
+		"bindings": {
+			"cmd-escape": "workspace::ToggleZoom"
+		}
+	},
+	{
+		"context": "Workspace",
+		"bindings": {
+			"ctrl-f": "project_panel::ToggleFocus",
+			"ctrl-@": "terminal_panel::ToggleFocus"
+		}
+	},
+	{
+		"context": "Editor",
+		"bindings": {
+			"ctrl-f": "project_panel::ToggleFocus"
+		}
+	},
+	{
+		"context": "ProjectPanel && not_editing",
+		"bindings": {
+			"l": "project_panel::Open"
+		}
+	},
+	{
+		"context": "Terminal",
+		"bindings": {
+			"cmd-n": "workspace::NewTerminal"
+		}
+	}
 ]
