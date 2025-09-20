@@ -27,9 +27,9 @@ local function setup_theme()
   common.set_background()
 
   if common.is_dark_mode() then
-    vim.cmd("colorscheme alduin")
+    vim.cmd("colorscheme Kiro")
   else
-    vim.cmd("colorscheme tokyonight-day")
+    vim.cmd("colorscheme Kiro")
   end
 
   setup_cursor_colors()
