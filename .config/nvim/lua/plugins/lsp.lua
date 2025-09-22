@@ -1,83 +1,75 @@
 return {
 
-  -- LSP
+  -- LSP（Neovim 0.11+ の新API）
   {
-    -- Using the Nvim built-in LSP Client
-    'neovim/nvim-lspconfig',
+    "neovim/nvim-lspconfig",
     config = function()
+      -- 既存の on_attach / capabilities があれば使う。無ければ空で。
+      local on_attach = _G.on_attach or function() end
+      local capabilities = _G.capabilities
 
-      local lspconfig = require("lspconfig")
-
-      -- ESLint
-      lspconfig.eslint.setup {
+      -- 全サーバ共通設定
+      vim.lsp.config("*", {
         on_attach = on_attach,
-      }
+        capabilities = capabilities,
+      })
 
-      -- Deno
-      lspconfig.denols.setup {
-        on_attach = on_attach,
-        root_dir = lspconfig.util.root_pattern('deno.json', 'deno.jsonc'),
-      }
-
-      -- TypeScript
-      lspconfig.tsserver.setup {
-        on_attach = on_attach,
-        root_dir = lspconfig.util.root_pattern('package.json'),
-        single_file_support = false,
-      }
-
-      -- Disable virtual text
+      -- Diagnostic（そのまま流用OK）
       vim.diagnostic.config({ virtual_text = false })
 
-      -- Keymap
-      vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-      vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-      vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-      vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+      -- キーマップ（そのまま）
+      vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
+      vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+      vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+      vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
 
+      -- 個別設定は after/lsp/*.lua に置く（次のセクション参照）
+
+      -- サーバ起動（tsserver → ts_ls に注意）
+      vim.lsp.enable({
+        "eslint",
+        "denols",
+        "ts_ls",
+      })
     end,
   },
 
-  -- Flutter
+  -- Flutter（そのままでOK）
   {
-    'akinsho/flutter-tools.nvim',
+    "akinsho/flutter-tools.nvim",
     lazy = false,
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'stevearc/dressing.nvim',
-    },
+    dependencies = { "nvim-lua/plenary.nvim", "stevearc/dressing.nvim" },
     config = true,
   },
 
-  -- LSP Manager
+  -- Mason
   {
-    -- Mason
-    'williamboman/mason.nvim',
+    "williamboman/mason.nvim",
     build = ":MasonUpdate",
     config = function()
-      require('mason').setup()
+      require("mason").setup()
     end,
   },
   {
-    -- Mason LSP Config
-    'williamboman/mason-lspconfig.nvim',
+    "williamboman/mason-lspconfig.nvim",
     config = function()
-      require('mason-lspconfig').setup()
+      require("mason-lspconfig").setup({
+        -- tsserver じゃなく ts_ls を入れる
+        ensure_installed = { "ts_ls", "denols", "eslint" },
+        automatic_installation = true,
+        -- v2 以降は “自動有効化” が入ってるけど、
+        -- 上で vim.lsp.enable してるので両方でも問題なし（重複起動はしない）。
+      })
     end,
   },
 
-  -- For showing diagnostics results on the bottom
+  -- Trouble（そのまま）
   {
-    -- Trouble
-    'folke/trouble.nvim',
-    dependencies = {
-      'nvim-tree/nvim-web-devicons',
-    },
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      require('trouble').setup()
-      vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
-        { silent = true, noremap = true }
-      )
+      require("trouble").setup()
+      vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { silent = true, noremap = true })
     end,
   },
 }
