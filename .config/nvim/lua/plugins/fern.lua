@@ -6,6 +6,7 @@ return {
   {
     -- Fern
     'lambdalisue/fern.vim',
+    enabled = false,
     dependencies = {
       'lambdalisue/fern-renderer-nerdfont.vim',
       'lambdalisue/nerdfont.vim',
