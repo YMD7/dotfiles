@@ -57,3 +57,6 @@ esac
 
 # opencode
 export PATH=/Users/Kyo/.opencode/bin:$PATH
+
+# Added by CodeRabbit CLI installer
+export PATH="/Users/Kyo/.local/bin:$PATH"
