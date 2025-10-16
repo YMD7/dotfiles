@@ -23,6 +23,9 @@ vim.opt.termguicolors = true
 vim.api.nvim_set_keymap("n", "<C-j>", ":bprev<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-k>", ":bnext<CR>", { noremap = true, silent = true })
 
+-- key
+vim.g.mapleader = " "   -- スペースをリーダーキーに
+
 -- edit
 vim.o.tabstop = 2 -- number of visual spaces per TAB
 vim.o.expandtab = true -- use spaces instead of tabs
