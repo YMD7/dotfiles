@@ -12,8 +12,8 @@
 	"buffer_font_family": "Hack Nerd Font",
 	"theme": {
 		"mode": "system",
-		"light": "Tokyo Night Light",
-		"dark": "Tokyo Night"
+		"light": "Neo Kiro Light",
+		"dark": "Neo Kiro Dark"
 	},
 	"cursor_blink": false,
 	"tab_size": 2,
@@ -30,6 +30,6 @@
 		}
 	},
 	"terminal": {
-		"dock": "right"
+		"dock": "bottom"
 	}
 }
