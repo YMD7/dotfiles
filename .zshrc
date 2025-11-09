@@ -54,9 +54,48 @@ esac
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
-
 # opencode
 export PATH=/Users/Kyo/.opencode/bin:$PATH
 
 # Added by CodeRabbit CLI installer
 export PATH="/Users/Kyo/.local/bin:$PATH"
+
+# direnv
+eval "$(direnv hook zsh)"
+
+# Terminal Startup Message
+messages=(
+  "Hello World!"
+  "Moo!"
+  "Meow!"
+  "Beep Boop!"
+  "まいど!"
+  "Banana!"
+  "!!!"
+  "???"
+  "Yay!"
+  "Woohoo!"
+  "Zzz...!"
+  "Hi!"
+  "Sup!"
+)
+
+animals=(
+  "default"
+  "small"
+  "tux"
+  "sheep"
+  "elephant"
+  "turkey"
+  "stegosaurus"
+  "fox"
+  "cheese"
+  "hellokitty"
+  "moose"
+  "turtle"
+  "llama"
+  "cupcake"
+)
+
+cowsay -f ${animals[$RANDOM % ${#animals[@]} + 1]} \
+  "${messages[$RANDOM % ${#messages[@]} + 1]}" | lolcat
