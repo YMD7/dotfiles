@@ -19,8 +19,15 @@
 # ==========================
 # # The config file consists of simple key-value pairs,
 # # separated by equals signs.
-font-family = Maple Mono NF
+font-family = Menlo
+font-family = Monaco
+font-family = NOTONOTO Console HS
+font-family = Bizin Gothic NF
+font-family = Osaka
+font-family = Apple Color Emoji
+
 font-size = 14
+
 # window-padding-x = 2
 #
 # # Spacing around the equals sign does not matter.
@@ -43,6 +50,7 @@ font-size = 14
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
-# 普通のウィンドウとして起動する設定
-# window-decorations = true
+# Dim unfocused panes for better visibility
+unfocused-split-opacity = 0.5
+
 keybind = global:cmd+shift+0=toggle_quick_terminal
