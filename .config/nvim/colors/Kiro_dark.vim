@@ -1,14 +1,15 @@
-" Kiro Theme for Neovim
+" Kiro Dark Theme for Neovim
 " Inspired by Kiro IDE's default color theme
 " Based on implementations for Zed and VSCode
 
+set background=dark
 highlight clear
 
 if exists("syntax_on")
   syntax reset
 endif
 
-let g:colors_name = "kiro"
+let g:colors_name = "kiro_dark"
 
 " Terminal color palette
 if has('nvim')
@@ -30,58 +31,30 @@ if has('nvim')
   let g:terminal_color_15 = '#ffffff'
 endif
 
-" Define color variables
-if &background == 'dark'
-  " Dark theme colors
-  let s:bg = '#211d25'
-  let s:bg_dark = '#19161d'
-  let s:bg_light = '#28242e'
-  let s:bg_highlight = '#352f3d'
-  let s:fg = '#ffffff'
-  let s:fg_light = '#dcdadf'
-  let s:fg_dark = '#938f9b'
-  let s:accent = '#b080ff'
-  let s:accent_dark = '#9e61ff'
-  let s:accent_secondary = '#8e47ff'
-  let s:border = '#4a464f'
-  
-  " Dark syntax colors
-  let s:red = '#ff8080'
-  let s:green = '#80ffb5'
-  let s:yellow = '#fff2b3'
-  let s:blue = '#8dc8fb'
-  let s:magenta = '#8e47ff'
-  let s:cyan = '#80f4ff'
-  let s:orange = '#ffcf99'
-  let s:pink = '#ffafd1'
-  let s:purple = '#c3a0fd'
-  let s:comment = '#a6a5a7'
-else
-  " Light theme colors
-  let s:bg = '#f2f1f4'
-  let s:bg_dark = '#dcdadf'
-  let s:bg_light = '#eae8ed'
-  let s:bg_highlight = '#ffffff'
-  let s:fg = '#352f3d'
-  let s:fg_light = '#5e5966'
-  let s:fg_dark = '#938f9b'
-  let s:accent = '#7138cc'
-  let s:accent_dark = '#6432b3'
-  let s:accent_secondary = '#8e47ff'
-  let s:border = '#c1bec6'
-  
-  " Light syntax colors (VSCode Neokiro theme colors)
-  let s:red = '#e21067'
-  let s:green = '#367c53'
-  let s:yellow = '#dbb90f'
-  let s:blue = '#2d6a9f'
-  let s:magenta = '#c80e5c'
-  let s:cyan = '#0c9aa7'
-  let s:orange = '#d08025'
-  let s:pink = '#e21067'
-  let s:purple = '#7559a6'
-  let s:comment = '#352f3d99'
-endif
+" Dark theme colors
+let s:bg = '#211d25'
+let s:bg_dark = '#19161d'
+let s:bg_light = '#28242e'
+let s:bg_highlight = '#352f3d'
+let s:fg = '#ffffff'
+let s:fg_light = '#dcdadf'
+let s:fg_dark = '#938f9b'
+let s:accent = '#b080ff'
+let s:accent_dark = '#9e61ff'
+let s:accent_secondary = '#8e47ff'
+let s:border = '#4a464f'
+
+" Dark syntax colors
+let s:red = '#ff8080'
+let s:green = '#80ffb5'
+let s:yellow = '#fff2b3'
+let s:blue = '#8dc8fb'
+let s:magenta = '#8e47ff'
+let s:cyan = '#80f4ff'
+let s:orange = '#ffcf99'
+let s:pink = '#ffafd1'
+let s:purple = '#c3a0fd'
+let s:comment = '#a6a5a7'
 
 " Helper function to set highlights
 function! s:hi(group, fg, bg, attr)
@@ -126,13 +99,8 @@ call s:hi('IncSearch', s:bg, s:orange, '')
 call s:hi('CurSearch', s:bg, s:orange, '')
 
 " Visual selection
-if &background == 'dark'
-  call s:hi('Visual', s:fg, '#4a3d66', '')
-  call s:hi('VisualNOS', s:fg, '#4a3d66', '')
-else
-  call s:hi('Visual', '', '#e4d9f2', '')
-  call s:hi('VisualNOS', '', '#e4d9f2', '')
-endif
+call s:hi('Visual', s:fg, '#4a3d66', '')
+call s:hi('VisualNOS', s:fg, '#4a3d66', '')
 
 " Messages
 call s:hi('ErrorMsg', s:red, '', 'bold')

@@ -1,6 +1,23 @@
 local M = {}
--- Check if macOS is in dark mode
+
+-- Fixed theme mode: nil (auto), "dark", or "light"
+M.theme_mode = nil
+
+-- Set fixed theme mode ("dark", "light", or nil for auto)
+function M.set_theme_mode(mode)
+  M.theme_mode = mode
+end
+
+-- Check if dark mode (respects fixed setting if set)
 function M.is_dark_mode()
+  -- Use fixed value if set
+  if M.theme_mode == "dark" then
+    return true
+  elseif M.theme_mode == "light" then
+    return false
+  end
+
+  -- Otherwise check macOS system setting
   local handle = io.popen("defaults read -g AppleInterfaceStyle 2>/dev/null")
   if handle then
     local result = handle:read("*a")
