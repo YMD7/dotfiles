@@ -5,12 +5,12 @@ return {
     foreground = "#ffffff",
     background = "#211d25",
 
-    cursor_bg = "#b080ff",
-    cursor_fg = "#211d25",
+    cursor_bg = "#c0a0ff",
+    cursor_fg = "#0d0b10",
     cursor_border = "#b080ff",
 
     selection_fg = "#ffffff",
-    selection_bg = "#352f3d",
+    selection_bg = "#5c5368",
 
     ansi = {
       "#19161d",
