@@ -5,6 +5,7 @@ alias dc='docker-compose'
 alias dss='docker-sync-stack'
 alias co='git checkout'
 alias code='opencode'
+alias cc='claude --dangerously-skip-permissions'
 
 PS1="[%n@Local %~] "
 
@@ -35,10 +36,6 @@ export PATH="$HOME/.local/share/flutter/bin:$PATH"
 # Rust
 export PATH="$HOME/.cargo/bin:$PATH"
 
-
-# Added by Windsurf
-export PATH="/Users/Kyo/.codeium/windsurf/bin:$PATH"
-
 # Prezto
 source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 
@@ -62,6 +59,11 @@ export PATH="/Users/Kyo/.local/bin:$PATH"
 
 # direnv
 eval "$(direnv hook zsh)"
+
+# WezTerm
+# Option + ← / → で単語移動（WezTerm のシーケンスに対応）
+bindkey '^[[1;3D' backward-word
+bindkey '^[[1;3C' forward-word
 
 # Terminal Startup Message
 messages=(
