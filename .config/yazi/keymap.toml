@@ -1,0 +1,22 @@
+# y a: absolute path
+[[mgr.prepend_keymap]]
+on  = ["y", "a"]
+run = [ "yank", "plugin clipboard -- --action=copy" ]
+desc = "Copy absolute path(s) to system clipboard"
+
+# y r: relative path
+[[mgr.prepend_keymap]]
+on  = ["y", "r"]
+run = [
+  "shell --block -- python3 -c 'import os,sys; b=os.getcwd(); print(\"\\n\".join(os.path.relpath(p,b) for p in sys.argv[1:]))' \"$@\" | pbcopy"
+]
+desc = "Copy relative path(s) to system clipboard"
+
+# y n: file name only
+[[mgr.prepend_keymap]]
+on  = ["y", "n"]
+run = [
+  "shell --block -- python3 -c 'import os,sys; print(\"\\n\".join(os.path.basename(p) for p in sys.argv[1:]))' \"$@\" | pbcopy"
+]
+desc = "Copy file name(s) to system clipboard"
+

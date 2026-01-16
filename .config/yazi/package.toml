@@ -8,6 +8,16 @@ use = "yazi-rs/flavors:gruvbox-dark"
 rev = "4a1802a"
 hash = "99aa06d3014798d86001c324468d497f"
 
+[[plugin.deps]]
+use = "orhnk/system-clipboard"
+rev = "888026c"
+hash = "9f82a544335a53d79e87ea315746caaa"
+
+[[plugin.deps]]
+use = "XYenon/clipboard"
+rev = "9089f90"
+hash = "e6efc609de1b617c7e8e98efd5286221"
+
 [[flavor.deps]]
 use = "AdithyanA2005/nord"
 rev = "bdf0bd4"
