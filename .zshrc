@@ -1,103 +1,113 @@
+# Aliases
 alias ls='ls -G'
 alias la='ls -Gla'
 alias ll='ls -Gl'
 alias dc='docker-compose'
 alias dss='docker-sync-stack'
 alias co='git checkout'
-alias code='opencode'
-alias cc='claude --dangerously-skip-permissions'
+command -v opencode &>/dev/null && alias code='opencode'
+command -v claude &>/dev/null && alias cc='claude --dangerously-skip-permissions'
 
+# Prompt
 PS1="[%n@Local %~] "
-
-# ssh agent
-ssh-add --apple-use-keychain
-
-# Homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# Volta
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-
-# anyenv
-eval "$(anyenv init -)"
-
-# pip2
-export PATH="$PATH:/Users/kyo/Library/Python/2.7/bin"
 
 # XDG base directory specification
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 
+# ssh agent (macOS)
+command -v ssh-add &>/dev/null && ssh-add --apple-use-keychain 2>/dev/null
+
+# Homebrew
+[[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Volta
+if [[ -d "$HOME/.volta" ]]; then
+  export VOLTA_HOME="$HOME/.volta"
+  export PATH="$VOLTA_HOME/bin:$PATH"
+fi
+
+# anyenv
+command -v anyenv &>/dev/null && eval "$(anyenv init -)"
+
+# pip2
+[[ -d "$HOME/Library/Python/2.7/bin" ]] && export PATH="$PATH:$HOME/Library/Python/2.7/bin"
+
 # Flutter
-export PATH="$HOME/.local/share/flutter/bin:$PATH"
+[[ -d "$HOME/.local/share/flutter/bin" ]] && export PATH="$HOME/.local/share/flutter/bin:$PATH"
 
 # Rust
-export PATH="$HOME/.cargo/bin:$PATH"
-
-# Prezto
-source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+[[ -d "$HOME/.cargo/bin" ]] && export PATH="$HOME/.cargo/bin:$PATH"
 
 # pnpm
-export PNPM_HOME="/Users/Kyo/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-. "$HOME/.local/share/../bin/env"
-
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+if [[ -d "$HOME/.local/share/pnpm" ]]; then
+  export PNPM_HOME="$HOME/.local/share/pnpm"
+  case ":$PATH:" in
+    *":$PNPM_HOME:"*) ;;
+    *) export PATH="$PNPM_HOME:$PATH" ;;
+  esac
+fi
 
 # opencode
-export PATH=/Users/Kyo/.opencode/bin:$PATH
+[[ -d "$HOME/.opencode/bin" ]] && export PATH="$HOME/.opencode/bin:$PATH"
 
-# Added by CodeRabbit CLI installer
-export PATH="/Users/Kyo/.local/bin:$PATH"
+# CodeRabbit CLI
+[[ -d "$HOME/.local/bin" ]] && export PATH="$HOME/.local/bin:$PATH"
+
+# Prezto
+[[ -f "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]] && source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+
+# Bun
+[[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
+
+# Kiro
+[[ "$TERM_PROGRAM" == "kiro" ]] && command -v kiro &>/dev/null && . "$(kiro --locate-shell-integration-path zsh)"
 
 # direnv
-eval "$(direnv hook zsh)"
+command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
 
-# WezTerm
-# Option + ← / → で単語移動（WezTerm のシーケンスに対応）
-bindkey '^[[1;3D' backward-word
-bindkey '^[[1;3C' forward-word
+# WezTerm: Option + ← / → で単語移動
+if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
+  bindkey '^[[1;3D' backward-word
+  bindkey '^[[1;3C' forward-word
+fi
 
 # Terminal Startup Message
-messages=(
-  "Hello World!"
-  "Moo!"
-  "Meow!"
-  "Beep Boop!"
-  "まいど!"
-  "Banana!"
-  "!!!"
-  "???"
-  "Yay!"
-  "Woohoo!"
-  "Zzz...!"
-  "Hi!"
-  "Sup!"
-)
+if command -v cowsay &>/dev/null && command -v lolcat &>/dev/null; then
+  messages=(
+    "Hello World!"
+    "Moo!"
+    "Meow!"
+    "Beep Boop!"
+    "まいど!"
+    "Banana!"
+    "!!!"
+    "???"
+    "Yay!"
+    "Woohoo!"
+    "Zzz...!"
+    "Hi!"
+    "Sup!"
+  )
 
-animals=(
-  "default"
-  "small"
-  "tux"
-  "sheep"
-  "elephant"
-  "turkey"
-  "stegosaurus"
-  "fox"
-  "cheese"
-  "hellokitty"
-  "moose"
-  "turtle"
-  "llama"
-  "cupcake"
-)
+  animals=(
+    "default"
+    "small"
+    "tux"
+    "sheep"
+    "elephant"
+    "turkey"
+    "stegosaurus"
+    "fox"
+    "cheese"
+    "hellokitty"
+    "moose"
+    "turtle"
+    "llama"
+    "cupcake"
+  )
 
-cowsay -f ${animals[$RANDOM % ${#animals[@]} + 1]} \
-  "${messages[$RANDOM % ${#messages[@]} + 1]}" | lolcat
+  cowsay -f ${animals[$RANDOM % ${#animals[@]} + 1]} \
+    "${messages[$RANDOM % ${#messages[@]} + 1]}" | lolcat
+fi
