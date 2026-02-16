@@ -3,6 +3,9 @@ if [[ -n "$SSH_CONNECTION" ]] && command -v tmux &>/dev/null && [[ -z "$TMUX" ]]
   tmux attach || tmux new
 fi
 
+# Prezto
+[[ -f "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]] && source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+
 # Aliases
 alias ls='ls -G'
 alias la='ls -Gla'
@@ -14,7 +17,12 @@ command -v opencode &>/dev/null && alias code='opencode'
 command -v claude &>/dev/null && alias cc='claude --dangerously-skip-permissions'
 
 # Prompt
-PS1="[%n@Local %~] "
+case "$(hostname -s)" in
+  EDOPC-087)       _host="EDOCODE MacBook Air" ;;
+  YMD-MacBook-Air) _host="YMD MacBook Air" ;;
+  *)               _host="%m" ;;
+esac
+PS1="[%n@$_host %~] "
 
 # XDG base directory specification
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -59,9 +67,6 @@ fi
 
 # CodeRabbit CLI
 [[ -d "$HOME/.local/bin" ]] && export PATH="$HOME/.local/bin:$PATH"
-
-# Prezto
-[[ -f "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]] && source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 
 # Bun
 [[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
