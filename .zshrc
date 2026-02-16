@@ -1,3 +1,8 @@
+# tmux auto-start on SSH
+if [[ -n "$SSH_CONNECTION" ]] && command -v tmux &>/dev/null && [[ -z "$TMUX" ]]; then
+  tmux attach || tmux new
+fi
+
 # Aliases
 alias ls='ls -G'
 alias la='ls -Gla'
