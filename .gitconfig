@@ -1,0 +1,23 @@
+[user]
+	name = Kyo Yamada
+	email = yamada.k@edocode.co.jp
+
+[coderabbit]
+	machineId = cli/c43ad29e85d9417d9e6fa0c394ef596f
+
+[core]
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	side-by-side = true
+	line-numbers = true
+
+[merge]
+	conflictstyle = zdiff3
+
+[diff]
+	colorMoved = default
