@@ -63,12 +63,54 @@ command -v ssh-add &>/dev/null && ssh-add --apple-use-keychain 2>/dev/null
 command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
 
 # --- Aliases ------------------------------------------------------------------
-alias ls='ls -G'
-alias la='ls -Gla'
-alias ll='ls -Gl'
+# Git
 alias co='git checkout'
+
+# AI tools
 command -v opencode &>/dev/null && alias code='opencode'
 command -v claude &>/dev/null && alias cc='claude --dangerously-skip-permissions'
+
+# --- Modern CLI tools (with fallback) -----------------------------------------
+# eza: ls replacement — color, icons, Git status, tree view
+if command -v eza &>/dev/null; then
+  alias ls='eza --icons --git'
+  alias la='eza -la --icons --git'
+  alias ll='eza -l --icons --git'
+  alias tree='eza --tree --icons'
+else
+  alias ls='ls -G'
+  alias la='ls -Gla'
+  alias ll='ls -Gl'
+fi
+
+# bat: cat replacement — syntax highlighting, line numbers
+command -v bat &>/dev/null && alias cat='bat --paging=never'
+
+# ripgrep: grep replacement — fast recursive search, .gitignore aware
+command -v rg &>/dev/null && alias grep='rg'
+
+# fd: find replacement — simple syntax, .gitignore aware
+command -v fd &>/dev/null && alias find='fd'
+
+# dust: du replacement — visual disk usage tree
+command -v dust &>/dev/null && alias du='dust'
+
+# sd: sed replacement — simple regex syntax
+command -v sd &>/dev/null && alias sed='sd'
+
+# btop: top replacement — graphical resource monitor
+command -v btop &>/dev/null && alias top='btop'
+
+# zoxide: cd replacement — frequency-based smart directory jump
+if command -v zoxide &>/dev/null; then
+  eval "$(zoxide init zsh)"
+  alias cd='z'
+fi
+
+# delta: diff/git pager — rich diff highlighting
+if command -v delta &>/dev/null; then
+  export GIT_PAGER='delta'
+fi
 
 # --- opencode -----------------------------------------------------------------
 [[ -d "$HOME/.opencode/bin" ]] && export PATH="$HOME/.opencode/bin:$PATH"
