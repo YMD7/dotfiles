@@ -17,3 +17,12 @@ This environment has modern CLI tools installed. Prefer these over traditional c
 | `diff`      | `delta`   | Configured as git pager        |
 | `top`       | `btop`    | `btop`                         |
 | `cd`        | `z`       | `z <partial-path>` (zoxide)    |
+
+## JSON Tools
+
+`jq` and `fx` are available for JSON processing:
+
+| Tool | Usage                              |
+|------|------------------------------------|
+| `jq` | `jq '<filter>' file.json`         |
+| `fx` | `fx file.json` (interactive viewer)|
