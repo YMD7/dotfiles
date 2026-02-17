@@ -1,4 +1,6 @@
+-- =============================================================================
 -- Kiro color schemes for WezTerm
+-- =============================================================================
 
 return {
   ["Kiro Dark"] = {
@@ -13,24 +15,24 @@ return {
     selection_bg = "#5c5368",
 
     ansi = {
-      "#19161d",
-      "#ff8080",
-      "#80ffb5",
-      "#fff2b3",
-      "#8dc8fb",
-      "#8e47ff",
-      "#80f4ff",
-      "#dcdadf",
+      "#19161d",    -- black
+      "#e59898",    -- red (muted)
+      "#98e5b8",    -- green (muted)
+      "#efe7c1",    -- yellow (muted)
+      "#a1c6e5",    -- blue (muted)
+      "#956ada",    -- magenta (muted)
+      "#98dee5",    -- cyan (muted)
+      "#dcdadf",    -- white
     },
     brights = {
-      "#938f9b",
-      "#ff8080",
-      "#80ffb5",
-      "#fff2b3",
-      "#8dc8fb",
-      "#8e47ff",
-      "#80f4ff",
-      "#ffffff",
+      "#938f9b",    -- bright black (gray)
+      "#e59898",    -- bright red
+      "#98e5b8",    -- bright green
+      "#efe7c1",    -- bright yellow
+      "#a1c6e5",    -- bright blue
+      "#956ada",    -- bright magenta
+      "#98dee5",    -- bright cyan
+      "#ffffff",    -- bright white
     },
 
     split = "#4a464f",
@@ -71,4 +73,3 @@ return {
     split = "#c1bec6",
   },
 }
-
