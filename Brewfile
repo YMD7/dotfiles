@@ -27,3 +27,6 @@ brew "lolcat"
 
 # Fonts
 cask "font-hack-nerd-font"
+
+# Apps
+cask "wezterm"          # GPU-accelerated terminal emulator
