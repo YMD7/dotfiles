@@ -1,59 +1,47 @@
-# tmux auto-start on SSH
+# ==============================================================================
+# .zshrc
+# ==============================================================================
+
+# --- tmux auto-start on SSH ---------------------------------------------------
 if [[ -n "$SSH_CONNECTION" ]] && command -v tmux &>/dev/null && [[ -z "$TMUX" ]]; then
   tmux attach || tmux new
 fi
 
-# Prezto
-[[ -f "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]] && source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-
-# Aliases
-alias ls='ls -G'
-alias la='ls -Gla'
-alias ll='ls -Gl'
-alias dc='docker-compose'
-alias dss='docker-sync-stack'
-alias co='git checkout'
-command -v opencode &>/dev/null && alias code='opencode'
-command -v claude &>/dev/null && alias cc='claude --dangerously-skip-permissions'
-
-# Prompt
-case "$(hostname -s)" in
-  EDOPC-087)       _host="EDOCODE MacBook Air" ;;
-  YMD-MacBook-Air) _host="YMD MacBook Air" ;;
-  *)               _host="%m" ;;
-esac
-PS1="[%n@$_host %~] "
-
-# XDG base directory specification
+# --- XDG base directory -------------------------------------------------------
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-# ssh agent (macOS)
-command -v ssh-add &>/dev/null && ssh-add --apple-use-keychain 2>/dev/null
-
-# Homebrew
+# --- Homebrew -----------------------------------------------------------------
 [[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# Volta
-if [[ -d "$HOME/.volta" ]]; then
-  export VOLTA_HOME="$HOME/.volta"
-  export PATH="$VOLTA_HOME/bin:$PATH"
+# --- Completion ---------------------------------------------------------------
+autoload -Uz compinit
+compinit
+
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'       # case-insensitive
+zstyle ':completion:*' menu select                          # arrow-key menu
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"     # colorized
+
+# --- sheldon (plugin manager) -------------------------------------------------
+if command -v sheldon &>/dev/null; then
+  eval "$(sheldon source)"
 fi
 
-# anyenv
-command -v anyenv &>/dev/null && eval "$(anyenv init -)"
+# --- Starship (prompt) --------------------------------------------------------
+if command -v starship &>/dev/null; then
+  eval "$(starship init zsh)"
+fi
 
-# pip2
-[[ -d "$HOME/Library/Python/2.7/bin" ]] && export PATH="$PATH:$HOME/Library/Python/2.7/bin"
+# --- mise (runtime version manager) -------------------------------------------
+if command -v mise &>/dev/null; then
+  eval "$(mise activate zsh)"
+fi
 
-# Flutter
-[[ -d "$HOME/.local/share/flutter/bin" ]] && export PATH="$HOME/.local/share/flutter/bin:$PATH"
-
-# Rust
+# --- Rust ---------------------------------------------------------------------
 [[ -d "$HOME/.cargo/bin" ]] && export PATH="$HOME/.cargo/bin:$PATH"
 
-# pnpm
+# --- pnpm ---------------------------------------------------------------------
 if [[ -d "$HOME/.local/share/pnpm" ]]; then
   export PNPM_HOME="$HOME/.local/share/pnpm"
   case ":$PATH:" in
@@ -62,62 +50,49 @@ if [[ -d "$HOME/.local/share/pnpm" ]]; then
   esac
 fi
 
-# opencode
-[[ -d "$HOME/.opencode/bin" ]] && export PATH="$HOME/.opencode/bin:$PATH"
-
-# CodeRabbit CLI
+# --- Local bin ----------------------------------------------------------------
 [[ -d "$HOME/.local/bin" ]] && export PATH="$HOME/.local/bin:$PATH"
 
-# Bun
+# --- Bun ----------------------------------------------------------------------
 [[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
 
-# Kiro
-[[ "$TERM_PROGRAM" == "kiro" ]] && command -v kiro &>/dev/null && . "$(kiro --locate-shell-integration-path zsh)"
+# --- ssh agent (macOS) --------------------------------------------------------
+command -v ssh-add &>/dev/null && ssh-add --apple-use-keychain 2>/dev/null
 
-# direnv
+# --- direnv -------------------------------------------------------------------
 command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
 
-# WezTerm: Option + ← / → で単語移動
+# --- Aliases ------------------------------------------------------------------
+alias ls='ls -G'
+alias la='ls -Gla'
+alias ll='ls -Gl'
+alias co='git checkout'
+command -v opencode &>/dev/null && alias code='opencode'
+command -v claude &>/dev/null && alias cc='claude --dangerously-skip-permissions'
+
+# --- opencode -----------------------------------------------------------------
+[[ -d "$HOME/.opencode/bin" ]] && export PATH="$HOME/.opencode/bin:$PATH"
+
+# --- Kiro ---------------------------------------------------------------------
+[[ "$TERM_PROGRAM" == "kiro" ]] && command -v kiro &>/dev/null && \
+  . "$(kiro --locate-shell-integration-path zsh)"
+
+# --- WezTerm: Option + arrow word navigation ----------------------------------
 if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
   bindkey '^[[1;3D' backward-word
   bindkey '^[[1;3C' forward-word
 fi
 
-# Terminal Startup Message
+# --- Startup message ----------------------------------------------------------
 if command -v cowsay &>/dev/null && command -v lolcat &>/dev/null; then
   messages=(
-    "Hello World!"
-    "Moo!"
-    "Meow!"
-    "Beep Boop!"
-    "まいど!"
-    "Banana!"
-    "!!!"
-    "???"
-    "Yay!"
-    "Woohoo!"
-    "Zzz...!"
-    "Hi!"
-    "Sup!"
+    "Hello World!" "Moo!" "Meow!" "Beep Boop!" "まいど!" "Banana!"
+    "!!!" "???" "Yay!" "Woohoo!" "Zzz...!" "Hi!" "Sup!"
   )
-
   animals=(
-    "default"
-    "small"
-    "tux"
-    "sheep"
-    "elephant"
-    "turkey"
-    "stegosaurus"
-    "fox"
-    "cheese"
-    "hellokitty"
-    "moose"
-    "turtle"
-    "llama"
-    "cupcake"
+    "default" "small" "tux" "sheep" "elephant" "turkey" "stegosaurus"
+    "fox" "cheese" "hellokitty" "moose" "turtle" "llama" "cupcake"
   )
-
   cowsay -f ${animals[$RANDOM % ${#animals[@]} + 1]} \
     "${messages[$RANDOM % ${#messages[@]} + 1]}" | lolcat
 fi

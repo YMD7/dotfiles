@@ -1,0 +1,49 @@
+# ==============================================================================
+# ~/.config/starship.toml
+# ==============================================================================
+
+format = """
+[$hostname$directory$git_branch$git_status](bold)
+$character"""
+
+# --- Hostname aliases ---------------------------------------------------------
+[hostname]
+ssh_only = false
+format = "[$ssh_symbol$hostname]($style) "
+style = "#b6a68e"
+
+[hostname.aliases]
+"EDOPC-087" = "EDOCODE"
+"YMD-MacBook-Air" = "YMD"
+
+# --- Directory ----------------------------------------------------------------
+[directory]
+truncation_length = 1
+format = "[$path]($style) "
+style = "#97b187"
+
+# --- Git branch ---------------------------------------------------------------
+[git_branch]
+symbol = " "
+format = "[$symbol$branch]($style) "
+style = "#87a2b1"
+
+# --- Git status ---------------------------------------------------------------
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+style = "#c88565"
+
+# --- Prompt character ---------------------------------------------------------
+[character]
+success_symbol = "[❯](#97b187)"
+error_symbol = "[❯](#c88565)"
+
+# --- Disable unused modules ---------------------------------------------------
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[package]
+disabled = true
