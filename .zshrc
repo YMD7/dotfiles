@@ -107,11 +107,6 @@ if command -v zoxide &>/dev/null; then
   alias cd='z'
 fi
 
-# delta: diff/git pager — rich diff highlighting
-if command -v delta &>/dev/null; then
-  export GIT_PAGER='delta'
-fi
-
 # --- opencode -----------------------------------------------------------------
 [[ -d "$HOME/.opencode/bin" ]] && export PATH="$HOME/.opencode/bin:$PATH"
 
