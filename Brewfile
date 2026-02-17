@@ -20,6 +20,11 @@ brew "git-delta"        # diff/git pager — rich highlighting
 brew "sd"               # sed replacement — simple regex
 brew "btop"             # top replacement — graphical resource monitor
 brew "yazi"             # terminal file manager — image preview support
+brew "jq"               # JSON processor — query & transform JSON
+brew "fx"               # JSON viewer — interactive terminal JSON explorer
+
+# GitHub
+brew "gh"               # GitHub CLI — PR, issue, repo management
 
 # Fun
 brew "cowsay"
