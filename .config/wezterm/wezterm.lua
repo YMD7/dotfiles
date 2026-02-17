@@ -58,6 +58,7 @@ config.colors = {
 -- =============================================================================
 config.font_size = 12.5
 config.font = wezterm.font_with_fallback {
+  'Hack Nerd Font Mono',
   'Menlo',
   'Monaco',
   'Bizin Gothic NF',
