@@ -1,44 +1,67 @@
 # ==============================================================================
-# ~/.config/starship.toml
+# ~/.config/starship.toml — Earth Tone Powerline
 # ==============================================================================
 
 format = """
-[$hostname$directory$git_branch$git_status](bold)
-$character"""
+[░▒▓](color_sand)$hostname[](fg:color_sand bg:color_moss)$directory[](fg:color_moss bg:color_slate)$git_branch$git_status[](fg:color_slate)$line_break$character"""
 
-# --- Hostname aliases ---------------------------------------------------------
+right_format = """
+$cmd_duration[](fg:color_sand_dark)$time[▓▒░](color_sand_dark)"""
+
+palette = "earth"
+
+[palettes.earth]
+color_sand = "#b6a68e"
+color_sand_dim = "#8a7e6b"
+color_sand_dark = "#4a4438"
+color_sand_fg = "#2a2520"
+color_moss = "#97b187"
+color_moss_fg = "#1e2a1a"
+color_slate = "#87a2b1"
+color_slate_fg = "#1a2530"
+color_terra = "#e8956a"
+color_cream = "#f0e6d3"
+
+# --- Hostname ----------------------------------------------------------------
 [hostname]
 ssh_only = false
-format = "[$ssh_symbol$hostname]($style) "
-style = "#b6a68e"
+format = "[ $ssh_symbol$hostname ](bg:color_sand fg:color_sand_fg)"
 
 [hostname.aliases]
 "EDOPC-087" = "EDOCODE"
 "YMD-MacBook-Air" = "YMD"
 
-# --- Directory ----------------------------------------------------------------
+# --- Directory ---------------------------------------------------------------
 [directory]
 truncation_length = 1
-format = "[$path]($style) "
-style = "#97b187"
+format = "[ $path ](bg:color_moss fg:color_moss_fg)"
 
-# --- Git branch ---------------------------------------------------------------
+# --- Git branch --------------------------------------------------------------
 [git_branch]
-symbol = " "
-format = "[$symbol$branch]($style) "
-style = "#87a2b1"
+symbol = ""
+format = "[ $symbol $branch ](bg:color_slate fg:color_slate_fg)"
 
-# --- Git status ---------------------------------------------------------------
+# --- Git status --------------------------------------------------------------
 [git_status]
-format = '([$all_status$ahead_behind]($style) )'
-style = "#c88565"
+format = '[$all_status$ahead_behind](bg:color_slate fg:color_cream)'
 
-# --- Prompt character ---------------------------------------------------------
+# --- Prompt character --------------------------------------------------------
 [character]
-success_symbol = "[❯](#97b187)"
-error_symbol = "[❯](#c88565)"
+success_symbol = "[❯](color_moss)"
+error_symbol = "[❯](color_terra)"
 
-# --- Disable unused modules ---------------------------------------------------
+# --- Command duration (right prompt) ----------------------------------------
+[cmd_duration]
+min_time = 2_000
+format = "[  $duration ](fg:color_sand)"
+
+# --- Time (right prompt) ----------------------------------------------------
+[time]
+disabled = false
+time_format = "%H:%M"
+format = "[  $time ](bg:color_sand_dark fg:color_sand)"
+
+# --- Disable unused modules --------------------------------------------------
 [aws]
 disabled = true
 
