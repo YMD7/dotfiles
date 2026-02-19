@@ -62,6 +62,10 @@ command -v ssh-add &>/dev/null && ssh-add --apple-use-keychain 2>/dev/null
 # --- direnv -------------------------------------------------------------------
 command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
 
+# --- Editor -------------------------------------------------------------------
+export EDITOR="nvim"
+export VISUAL="nvim"
+
 # --- Aliases ------------------------------------------------------------------
 # Git
 alias co='git checkout'
