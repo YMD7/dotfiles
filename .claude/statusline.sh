@@ -31,10 +31,10 @@ fi
 
 # Compose status line
 if [ -n "$GIT_BRANCH" ]; then
-  printf "${LAVENDER} 󰉋 %s${RESET}  ${LAVENDER}${ICON_BRANCH} %s${RESET}  ${MUTED} 󰚩 %s${RESET}  ${BLUE}󰒆 %s${RESET}" \
-    "$DIR_NAME" "$GIT_BRANCH" "$MODEL" "$CTX_STR"
+  printf "${BLUE}󰒆 %s${RESET}  ${LAVENDER} 󰉋 %s${RESET}  ${LAVENDER}${ICON_BRANCH} %s${RESET}  ${MUTED} 󰚩 %s${RESET}" \
+    "$CTX_STR" "$DIR_NAME" "$GIT_BRANCH" "$MODEL"
 else
-  printf "${LAVENDER} 󰉋 %s${RESET}  ${MUTED} 󰚩 %s${RESET}  ${BLUE}󰒆 %s${RESET}" \
-    "$DIR_NAME" "$MODEL" "$CTX_STR"
+  printf "${BLUE}󰒆 %s${RESET}  ${LAVENDER} 󰉋 %s${RESET}  ${MUTED} 󰚩 %s${RESET}" \
+    "$CTX_STR" "$DIR_NAME" "$MODEL"
 fi
 
