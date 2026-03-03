@@ -20,10 +20,21 @@ brew bundle
 各設定ファイルのシンボリックリンクをホームディレクトリに作成する。
 
 ```sh
-# 例
 ln -sf ~/Dev/dotfiles/.zshrc ~/.zshrc
 ln -sf ~/Dev/dotfiles/.tmux.conf ~/.tmux.conf
 ln -sf ~/Dev/dotfiles/.gitconfig ~/.gitconfig
+mkdir -p ~/.config ~/.claude
+ln -sf ~/Dev/dotfiles/.config/ghostty ~/.config/ghostty
+ln -sf ~/Dev/dotfiles/.config/aerospace ~/.config/aerospace
+ln -sf ~/Dev/dotfiles/.config/yazi ~/.config/yazi
+ln -sf ~/Dev/dotfiles/.config/sheldon ~/.config/sheldon
+ln -sf ~/Dev/dotfiles/.config/starship/starship.toml ~/.config/starship.toml
+ln -sf ~/Dev/dotfiles/.config/wezterm ~/.config/wezterm
+ln -sf ~/Dev/dotfiles/.config/nvim ~/.config/nvim
+ln -sf ~/Dev/dotfiles/.config/zed ~/.config/zed
+ln -sf ~/Dev/dotfiles/.claude/CLAUDE.md ~/.claude/CLAUDE.md
+ln -sf ~/Dev/dotfiles/.claude/skills ~/.claude/skills
+ln -sf ~/Dev/dotfiles/.claude/statusline.sh ~/.claude/statusline.sh
 ```
 
 ### 4. Neovim プラグインのインストール
