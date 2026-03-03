@@ -5,7 +5,7 @@
 ### 1. リポジトリをクローン
 
 ```sh
-git clone https://github.com/Kyo/dotfiles.git ~/Dev/dotfiles
+git clone https://github.com/YMD7/dotfiles.git ~/Dev/dotfiles
 cd ~/Dev/dotfiles
 ```
 
