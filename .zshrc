@@ -30,6 +30,11 @@ fi
 
 # --- Starship (prompt) --------------------------------------------------------
 if command -v starship &>/dev/null; then
+  case "$(hostname -s)" in
+    EDOPC-087)    export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/work.toml" ;;
+    YMD-MacBook*) export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/home.toml" ;;
+    *)            export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml" ;;
+  esac
   eval "$(starship init zsh)"
 fi
 
