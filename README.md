@@ -28,7 +28,7 @@ ln -sf ~/Dev/dotfiles/.config/ghostty ~/.config/ghostty
 ln -sf ~/Dev/dotfiles/.config/aerospace ~/.config/aerospace
 ln -sf ~/Dev/dotfiles/.config/yazi ~/.config/yazi
 ln -sf ~/Dev/dotfiles/.config/sheldon ~/.config/sheldon
-ln -sf ~/Dev/dotfiles/.config/starship/starship.toml ~/.config/starship.toml
+ln -sf ~/Dev/dotfiles/.config/starship ~/.config/starship
 ln -sf ~/Dev/dotfiles/.config/wezterm ~/.config/wezterm
 ln -sf ~/Dev/dotfiles/.config/nvim ~/.config/nvim
 ln -sf ~/Dev/dotfiles/.config/zed ~/.config/zed
@@ -57,7 +57,7 @@ git clone https://github.com/github/copilot.vim.git \
 | `~/.config/aerospace/`    | `.config/aerospace/`             |
 | `~/.config/yazi/`         | `.config/yazi/`                  |
 | `~/.config/sheldon/`      | `.config/sheldon/`               |
-| `~/.config/starship.toml` | `.config/starship/starship.toml` |
+| `~/.config/starship/`     | `.config/starship/`              |
 | `~/.config/wezterm/`      | `.config/wezterm/`               |
 | `~/.config/nvim/`         | `.config/nvim/`                  |
 | `~/.config/zed/`          | `.config/zed/`                   |
