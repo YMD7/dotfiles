@@ -3,9 +3,9 @@
 # ==============================================================================
 
 # --- tmux auto-start on SSH ---------------------------------------------------
-if [[ -n "$SSH_CONNECTION" ]] && command -v tmux &>/dev/null && [[ -z "$TMUX" ]]; then
-  tmux attach || tmux new
-fi
+# if [[ -n "$SSH_CONNECTION" ]] && command -v tmux &>/dev/null && [[ -z "$TMUX" ]]; then
+#   tmux attach || tmux new
+# fi
 
 # --- XDG base directory -------------------------------------------------------
 export XDG_DATA_HOME="$HOME/.local/share"
