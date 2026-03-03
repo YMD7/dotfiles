@@ -26,6 +26,15 @@ ln -sf ~/Dev/dotfiles/.tmux.conf ~/.tmux.conf
 ln -sf ~/Dev/dotfiles/.gitconfig ~/.gitconfig
 ```
 
+### 4. Neovim プラグインのインストール
+
+Copilot.vim は `pack/` に手動インストールする（リポジトリには含まれていない）。
+
+```sh
+git clone https://github.com/github/copilot.vim.git \
+  ~/.config/nvim/pack/github/start/copilot.vim
+```
+
 ## シンボリックリンク一覧
 
 | リンク元 (`~/...`)        | リンク先 (`dotfiles/...`)        |
