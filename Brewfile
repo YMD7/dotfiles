@@ -23,6 +23,9 @@ brew "yazi"             # terminal file manager — image preview support
 brew "jq"               # JSON processor — query & transform JSON
 brew "fx"               # JSON viewer — interactive terminal JSON explorer
 
+# Network
+brew "mosh"             # mobile shell — roaming & intermittent SSH
+
 # GitHub
 brew "gh"               # GitHub CLI — PR, issue, repo management
 
