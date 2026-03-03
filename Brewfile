@@ -34,4 +34,5 @@ brew "lolcat"
 cask "font-hack-nerd-font"
 
 # Apps
+cask "codex"            # OpenAI Codex — AI coding agent
 cask "wezterm"          # GPU-accelerated terminal emulator
