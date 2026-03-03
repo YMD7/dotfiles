@@ -114,6 +114,10 @@ fi
 # --- opencode -----------------------------------------------------------------
 [[ -d "$HOME/.opencode/bin" ]] && export PATH="$HOME/.opencode/bin:$PATH"
 
+# --- Tailscale ----------------------------------------------------------------
+[[ -d "/Applications/Tailscale.app/Contents/MacOS" ]] && \
+  export PATH="/Applications/Tailscale.app/Contents/MacOS:$PATH"
+
 # --- Kiro ---------------------------------------------------------------------
 [[ "$TERM_PROGRAM" == "kiro" ]] && command -v kiro &>/dev/null && \
   . "$(kiro --locate-shell-integration-path zsh)"
