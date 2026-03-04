@@ -55,7 +55,17 @@ return {
     -- Screen / scrollback control
     ------------------------------------------------------------------------
     -- Cmd + k : Clear screen and scrollback
-    { key = 'k', mods = 'CMD', action = act.ClearScrollback 'ScrollbackAndViewport' },
+    { key = 'k', mods = 'CMD', action = wezterm.action_callback(function(window, pane)
+        local proc = pane:get_foreground_process_name() or ''
+        if proc:find('tmux') then
+            window:perform_action(act.Multiple {
+                act.ClearScrollback 'ScrollbackOnly',
+                act.SendKey { key = 'l', mods = 'CTRL' },
+            }, pane)
+        else
+            window:perform_action(act.ClearScrollback 'ScrollbackAndViewport', pane)
+        end
+    end) },
     -- Cmd + Shift + k : Scroll to top (keep output)
     { key = 'K', mods = 'CMD|SHIFT', action = act.ScrollToTop },
     -- Cmd + Shift + j : Scroll to bottom
