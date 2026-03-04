@@ -25,6 +25,7 @@ brew "fx"               # JSON viewer — interactive terminal JSON explorer
 
 # Network
 brew "mosh"             # mobile shell — roaming & intermittent SSH
+brew "tmux"             # terminal multiplexer — sessions, windows, panes
 
 # GitHub
 brew "gh"               # GitHub CLI — PR, issue, repo management
