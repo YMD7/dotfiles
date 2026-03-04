@@ -1,0 +1,115 @@
+#!/bin/bash
+# tmux-ai-title: Generate AI-powered work title for tmux status line
+# Usage:
+#   tmux-ai-title display  - Show cached title (fast, for status line)
+#   tmux-ai-title update   - Generate new title via Claude (background)
+
+CACHE_DIR="$HOME/.cache/tmux-ai-title"
+UPDATE_INTERVAL=180  # 3 minutes in seconds
+
+mkdir -p "$CACHE_DIR"
+
+# Session name: prefer argument, fallback to tmux query
+SESSION_NAME="${2:-$(tmux display-message -p '#{session_name}' 2>/dev/null || echo "default")}"
+CACHE_FILE="$CACHE_DIR/$SESSION_NAME"
+LOCK_FILE="$CACHE_DIR/${SESSION_NAME}.lock"
+
+display() {
+    # Show cached title if it exists
+    if [[ -f "$CACHE_FILE" ]]; then
+        cat "$CACHE_FILE"
+    fi
+
+    # Check if update needed (cache older than UPDATE_INTERVAL or missing)
+    local needs_update=false
+    if [[ ! -f "$CACHE_FILE" ]]; then
+        needs_update=true
+    elif [[ "$(uname)" == "Darwin" ]]; then
+        local age=$(( $(date +%s) - $(stat -f %m "$CACHE_FILE") ))
+        [[ $age -ge $UPDATE_INTERVAL ]] && needs_update=true
+    else
+        local age=$(( $(date +%s) - $(stat -c %Y "$CACHE_FILE") ))
+        [[ $age -ge $UPDATE_INTERVAL ]] && needs_update=true
+    fi
+
+    # Spawn background update if needed and not already running
+    if $needs_update && ! [[ -f "$LOCK_FILE" ]]; then
+        nohup "$0" update "$SESSION_NAME" >/dev/null 2>&1 &
+    fi
+}
+
+update() {
+    # Check for claude CLI
+    if ! command -v claude &>/dev/null; then
+        echo "?" > "$CACHE_FILE"
+        return 1
+    fi
+
+    # Prevent concurrent updates
+    if [[ -f "$LOCK_FILE" ]]; then
+        local lock_age=$(( $(date +%s) - $(stat -f %m "$LOCK_FILE" 2>/dev/null || stat -c %Y "$LOCK_FILE" 2>/dev/null || echo 0) ))
+        # Stale lock (older than 2 minutes), remove it
+        if [[ $lock_age -ge 120 ]]; then
+            rm -f "$LOCK_FILE"
+        else
+            return 0
+        fi
+    fi
+    touch "$LOCK_FILE"
+    trap 'rm -f "$LOCK_FILE"' EXIT
+
+    # Gather context from the active pane of the session
+    local pane_target="${SESSION_NAME}:.+"
+    local cwd
+    cwd=$(tmux display-message -t "$pane_target" -p '#{pane_current_path}' 2>/dev/null || echo "$HOME")
+
+    # Git info
+    local git_info=""
+    if git -C "$cwd" rev-parse --is-inside-work-tree &>/dev/null; then
+        local repo_name branch
+        repo_name=$(basename "$(git -C "$cwd" rev-parse --show-toplevel 2>/dev/null)")
+        branch=$(git -C "$cwd" branch --show-current 2>/dev/null)
+        local changed_files
+        changed_files=$(git -C "$cwd" diff --name-only 2>/dev/null | head -5)
+        git_info="Repo: ${repo_name}, Branch: ${branch}"
+        if [[ -n "$changed_files" ]]; then
+            git_info="${git_info}, Changed: ${changed_files}"
+        fi
+    fi
+
+    # Capture visible pane content (last 30 lines)
+    local pane_content
+    pane_content=$(tmux capture-pane -t "$pane_target" -p 2>/dev/null | tail -30)
+
+    # Recent shell history (last 10 commands)
+    local history_content=""
+    if [[ -f "$HOME/.zsh_history" ]]; then
+        history_content=$(tail -20 "$HOME/.zsh_history" 2>/dev/null | sed 's/^: [0-9]*:[0-9]*;//' | tail -10)
+    fi
+
+    # Build prompt
+    local context="Current directory: $cwd"
+    [[ -n "$git_info" ]] && context="${context}\n${git_info}"
+    [[ -n "$history_content" ]] && context="${context}\n\nRecent commands:\n${history_content}"
+    [[ -n "$pane_content" ]] && context="${context}\n\nTerminal screen:\n${pane_content}"
+
+    local prompt="Based on the following terminal context, generate a short work title (max 20 characters in Japanese, or max 40 chars in English) that describes what the user is currently working on. Output ONLY the title, nothing else. If unclear, output a short description of the directory/project.
+
+${context}"
+
+    # Call claude headlessly (unset CLAUDECODE to allow nested invocation)
+    local result
+    result=$(unset CLAUDECODE; echo "$prompt" | claude --print --model haiku --max-turns 1 2>/dev/null)
+
+    if [[ -n "$result" ]]; then
+        # Trim to max 20 characters (not bytes) and remove newlines
+        result=$(echo "$result" | tr -d '\n' | cut -c 1-20)
+        echo "$result" > "$CACHE_FILE"
+    fi
+}
+
+case "${1:-display}" in
+    display) display ;;
+    update)  update ;;
+    *)       echo "Usage: $0 {display|update}" ;;
+esac

@@ -9,43 +9,19 @@ git clone https://github.com/YMD7/dotfiles.git ~/Dev/dotfiles
 cd ~/Dev/dotfiles
 ```
 
-### 2. Homebrew で依存パッケージをインストール
+### 2. セットアップスクリプトを実行
 
 ```sh
-brew bundle
+bash setup.sh
 ```
 
-### 3. シンボリックリンクを作成
+以下が自動で行われる:
 
-各設定ファイルのシンボリックリンクをホームディレクトリに作成する。
-
-```sh
-ln -sf ~/Dev/dotfiles/.zshenv ~/.zshenv
-ln -sf ~/Dev/dotfiles/.zshrc ~/.zshrc
-ln -sf ~/Dev/dotfiles/.tmux.conf ~/.tmux.conf
-ln -sf ~/Dev/dotfiles/.gitconfig ~/.gitconfig
-mkdir -p ~/.config ~/.claude
-ln -sf ~/Dev/dotfiles/.config/ghostty ~/.config/ghostty
-ln -sf ~/Dev/dotfiles/.config/aerospace ~/.config/aerospace
-ln -sf ~/Dev/dotfiles/.config/yazi ~/.config/yazi
-ln -sf ~/Dev/dotfiles/.config/sheldon ~/.config/sheldon
-ln -sf ~/Dev/dotfiles/.config/starship ~/.config/starship
-ln -sf ~/Dev/dotfiles/.config/wezterm ~/.config/wezterm
-ln -sf ~/Dev/dotfiles/.config/nvim ~/.config/nvim
-ln -sf ~/Dev/dotfiles/.config/zed ~/.config/zed
-ln -sf ~/Dev/dotfiles/.claude/skills ~/.claude/skills
-ln -sf ~/Dev/dotfiles/.claude/settings.json ~/.claude/settings.json
-ln -sf ~/Dev/dotfiles/.claude/statusline.sh ~/.claude/statusline.sh
-```
-
-### 4. Neovim プラグインのインストール
-
-Copilot.vim は `pack/` に手動インストールする（リポジトリには含まれていない）。
-
-```sh
-git clone https://github.com/github/copilot.vim.git \
-  ~/.config/nvim/pack/github/start/copilot.vim
-```
+1. Homebrew のインストール（未導入の場合）
+2. `brew bundle` で依存パッケージをインストール
+3. シンボリックリンクの一括作成
+4. mise によるランタイム（Node.js, Python, Ruby）のインストール
+5. Copilot.vim のクローン（未導入の場合）
 
 ## シンボリックリンク一覧
 
@@ -63,6 +39,16 @@ git clone https://github.com/github/copilot.vim.git \
 | `~/.config/wezterm/`      | `.config/wezterm/`               |
 | `~/.config/nvim/`         | `.config/nvim/`                  |
 | `~/.config/zed/`          | `.config/zed/`                   |
+| `~/.config/mise/`         | `.config/mise/`                  |
 | `~/.claude/skills/`       | `.claude/skills/`                |
 | `~/.claude/settings.json` | `.claude/settings.json`          |
 | `~/.claude/statusline.sh` | `.claude/statusline.sh`          |
+| `~/.local/bin/tmux-ai-title` | `bin/tmux-ai-title`           |
+
+## tmux AI タイトル
+
+tmux のステータスライン右側に、現在の作業内容を AI が自動生成したタイトルとして表示する。
+
+- **仕組み**: 3分おきにバックグラウンドで `claude` CLI (haiku) を呼び出し、ターミナルのコンテキスト（cwd、git 情報、画面内容、シェル履歴）からタイトルを生成
+- **キャッシュ**: `~/.cache/tmux-ai-title/<セッション名>` にセッションごとに保存。ステータスライン表示時はキャッシュ読みのみなので遅延なし
+- **前提**: `claude` CLI がインストールされていること
