@@ -9,6 +9,7 @@ brew "starship"         # cross-shell prompt
 brew "mise"             # runtime version manager (node, python, ruby, etc.)
 brew "direnv"           # per-directory environment variables
 brew "uv"               # Python package manager — fast pip/venv replacement
+brew "libyaml"          # YAML parser — required for Ruby (psych extension)
 
 # Modern CLI tools
 brew "eza"              # ls replacement — color, icons, Git status
