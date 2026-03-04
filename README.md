@@ -33,8 +33,8 @@ ln -sf ~/Dev/dotfiles/.config/starship ~/.config/starship
 ln -sf ~/Dev/dotfiles/.config/wezterm ~/.config/wezterm
 ln -sf ~/Dev/dotfiles/.config/nvim ~/.config/nvim
 ln -sf ~/Dev/dotfiles/.config/zed ~/.config/zed
-ln -sf ~/Dev/dotfiles/.claude/CLAUDE.md ~/.claude/CLAUDE.md
 ln -sf ~/Dev/dotfiles/.claude/skills ~/.claude/skills
+ln -sf ~/Dev/dotfiles/.claude/settings.json ~/.claude/settings.json
 ln -sf ~/Dev/dotfiles/.claude/statusline.sh ~/.claude/statusline.sh
 ```
 
@@ -63,6 +63,6 @@ git clone https://github.com/github/copilot.vim.git \
 | `~/.config/wezterm/`      | `.config/wezterm/`               |
 | `~/.config/nvim/`         | `.config/nvim/`                  |
 | `~/.config/zed/`          | `.config/zed/`                   |
-| `~/.claude/CLAUDE.md`     | `.claude/CLAUDE.md`              |
 | `~/.claude/skills/`       | `.claude/skills/`                |
+| `~/.claude/settings.json` | `.claude/settings.json`          |
 | `~/.claude/statusline.sh` | `.claude/statusline.sh`          |
