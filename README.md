@@ -20,6 +20,7 @@ brew bundle
 各設定ファイルのシンボリックリンクをホームディレクトリに作成する。
 
 ```sh
+ln -sf ~/Dev/dotfiles/.zshenv ~/.zshenv
 ln -sf ~/Dev/dotfiles/.zshrc ~/.zshrc
 ln -sf ~/Dev/dotfiles/.tmux.conf ~/.tmux.conf
 ln -sf ~/Dev/dotfiles/.gitconfig ~/.gitconfig
@@ -50,6 +51,7 @@ git clone https://github.com/github/copilot.vim.git \
 
 | リンク元 (`~/...`)        | リンク先 (`dotfiles/...`)        |
 | ------------------------- | -------------------------------- |
+| `~/.zshenv`               | `.zshenv`                        |
 | `~/.zshrc`                | `.zshrc`                         |
 | `~/.tmux.conf`            | `.tmux.conf`                     |
 | `~/.gitconfig`            | `.gitconfig`                     |
