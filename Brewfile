@@ -25,6 +25,9 @@ brew "yazi"             # terminal file manager — image preview support
 brew "jq"               # JSON processor — query & transform JSON
 brew "fx"               # JSON viewer — interactive terminal JSON explorer
 
+# Editor
+brew "neovim"           # Vim-fork — extensible text editor
+
 # Network
 brew "mosh"             # mobile shell — roaming & intermittent SSH
 brew "tmux"             # terminal multiplexer — sessions, windows, panes
