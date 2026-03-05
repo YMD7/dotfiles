@@ -32,6 +32,17 @@ vim.o.expandtab = true -- use spaces instead of tabs
 vim.o.shiftwidth = 2 -- number of spaces to use for autoindent
 vim.o.smartindent = true -- indent a new line
 vim.o.showmatch = true -- highlight matching [{()}]
+vim.g.clipboard = {
+  name = 'OSC 52',
+  copy = {
+    ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+    ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+  },
+  paste = {
+    ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+    ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+  },
+}
 vim.opt.clipboard:append{"unnamedplus"} -- enable sharing OS clipboard
 vim.g.vim_json_syntax_conceal = 0 -- JSON のダブルクォーテーションの非表示化を無効にする
 
