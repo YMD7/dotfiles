@@ -57,7 +57,7 @@ return {
     -- Cmd + k : Clear screen and scrollback
     { key = 'k', mods = 'CMD', action = wezterm.action_callback(function(window, pane)
         local proc = pane:get_foreground_process_name() or ''
-        if proc:find('tmux') then
+        if proc:find('tmux') or proc:find('ssh') then
             window:perform_action(act.Multiple {
                 act.ClearScrollback 'ScrollbackOnly',
                 act.SendKey { key = 'l', mods = 'CTRL' },
