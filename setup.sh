@@ -22,6 +22,7 @@ declare -a links=(
   ".zshenv                       : $HOME/.zshenv"
   ".zshrc                        : $HOME/.zshrc"
   ".tmux.conf                    : $HOME/.tmux.conf"
+  ".vimrc                        : $HOME/.vimrc"
   ".gitconfig                    : $HOME/.gitconfig"
   ".config/ghostty               : $HOME/.config/ghostty"
   ".config/aerospace             : $HOME/.config/aerospace"
