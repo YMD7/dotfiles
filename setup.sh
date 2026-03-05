@@ -44,7 +44,7 @@ for entry in "${links[@]}"; do
   dest="${entry##*:}"
   dest="${dest// /}"
   mkdir -p "$(dirname "$dest")"
-  ln -sf "$DOTFILES_DIR/$src" "$dest"
+  ln -sfn "$DOTFILES_DIR/$src" "$dest"
 done
 
 # ---------- 4. mise install ----------
