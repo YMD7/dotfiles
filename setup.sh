@@ -36,6 +36,9 @@ declare -a links=(
   ".claude/settings.json         : $HOME/.claude/settings.json"
   ".claude/statusline.sh         : $HOME/.claude/statusline.sh"
   "bin/tmux-ai-title             : $HOME/.local/bin/tmux-ai-title"
+  "AGENTS.md                      : $HOME/CLAUDE.md"
+  "AGENTS.md                      : $HOME/.codex/AGENTS.md"
+  "AGENTS.md                      : $HOME/.gemini/GEMINI.md"
 )
 
 for entry in "${links[@]}"; do
