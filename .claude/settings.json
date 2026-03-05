@@ -8,5 +8,16 @@
     "command": "~/.claude/statusline.sh",
     "padding": 0
   },
-  "skipDangerousModePermissionPrompt": true
+  "extraKnownMarketplaces": {
+    "claude-code-lsps": {
+      "source": {
+        "source": "github",
+        "repo": "boostvolt/claude-code-lsps"
+      }
+    }
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "enabledPlugins": {
+    "vtsls@claude-code-lsps": true
+  }
 }
