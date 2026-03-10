@@ -38,3 +38,5 @@
 ## 開発時の注意事項
 - **Bashコマンド**: `&&` 演算子を使った複数コマンドの一括実行は禁止。コマンドは一つずつ個別に実行
 - **Git操作**: `git add .` / `git add -A` は使用禁止。修正対象ファイルを一つずつ指定し、コミット前に必ず `git status` で確認
+- **Git push**: `--no-verify` によるpre-push/pre-commitフックのスキップは禁止。フックでエラーが出たらその場で修正してから再実行する
+- **PR本文編集**: `sed` / `sd` 等によるインライン置換は禁止。`gh pr edit --body-file <file>` またはHEREDOC（`--body "$(cat <<'EOF' ... EOF)"`）を使用
