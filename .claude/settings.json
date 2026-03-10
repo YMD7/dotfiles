@@ -8,16 +8,27 @@
     "command": "~/.claude/statusline.sh",
     "padding": 0
   },
+  "enabledPlugins": {
+    "vtsls@claude-code-lsps": true,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "context7@claude-plugins-official": true
+  },
   "extraKnownMarketplaces": {
     "claude-code-lsps": {
       "source": {
         "source": "github",
         "repo": "boostvolt/claude-code-lsps"
       }
+    },
+    "claude-code-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-code"
+      }
     }
   },
-  "skipDangerousModePermissionPrompt": true,
-  "enabledPlugins": {
-    "vtsls@claude-code-lsps": true
-  }
+  "skipDangerousModePermissionPrompt": true
 }
