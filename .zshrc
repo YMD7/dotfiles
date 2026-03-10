@@ -79,6 +79,15 @@ alias co='git checkout'
 command -v opencode &>/dev/null && alias code='opencode'
 command -v claude &>/dev/null && alias cc='claude --dangerously-skip-permissions'
 
+# tmuxの外でも中でも、Blinkに通知を確実に届けるエイリアス
+notify() {
+  if [ -n "$TMUX" ]; then
+    printf '\033Ptmux;\033\033]777;notify;Blink;完了しました\a\033\\'
+  else
+    printf '\033]777;notify;Blink;完了しました\a'
+  fi
+}
+
 # --- Modern CLI tools (with fallback) -----------------------------------------
 # eza: ls replacement — color, icons, Git status, tree view
 if command -v eza &>/dev/null; then
