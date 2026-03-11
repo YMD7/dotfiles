@@ -19,6 +19,11 @@ return {
         domain = 'CurrentPaneDomain'
       }
     },
+    -- Cmd + Shift + 3 : Split pane into 3 equal columns
+    { key = '#', mods = 'CTRL|SHIFT', action = wezterm.action_callback(function(window, pane)
+        local right1 = pane:split({ direction = 'Right', size = 0.6667 })
+        right1:split({ direction = 'Right', size = 0.5 })
+    end) },
     ------------------------------------------------------------------------
     -- Pane navigation
     ------------------------------------------------------------------------
