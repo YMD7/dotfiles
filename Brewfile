@@ -44,4 +44,5 @@ cask "font-hack-nerd-font"
 
 # Apps
 cask "codex"            # OpenAI Codex — AI coding agent
+cask "google-chrome-canary"  # Chrome Canary — dev/testing browser
 cask "wezterm"          # GPU-accelerated terminal emulator
