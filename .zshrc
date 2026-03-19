@@ -62,7 +62,7 @@ fi
 [[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
 
 # --- ssh agent (macOS) --------------------------------------------------------
-command -v ssh-add &>/dev/null && ssh-add --apple-use-keychain 2>/dev/null
+command -v ssh-add &>/dev/null && ssh-add --apple-load-keychain 2>/dev/null
 
 # --- direnv -------------------------------------------------------------------
 command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
