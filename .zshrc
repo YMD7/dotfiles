@@ -80,7 +80,7 @@ command -v opencode &>/dev/null && alias code='opencode'
 command -v claude &>/dev/null && alias cc='claude --dangerously-skip-permissions'
 
 # Chrome Canary with remote debugging
-alias chrome-debug='/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary --remote-debugging-port=9222 --no-first-run >/dev/null 2>&1 &disown'
+alias chrome-debug='/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary --remote-debugging-port=9222 --user-data-dir=/tmp/chrome-debug --no-first-run >/dev/null 2>&1 &disown'
 
 # tmuxの外でも中でも、Blinkに通知を確実に届けるエイリアス
 notify() {
