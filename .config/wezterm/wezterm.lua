@@ -70,6 +70,8 @@ config.font = wezterm.font_with_fallback {
 -- =============================================================================
 -- Window
 -- =============================================================================
+config.initial_cols = 80
+config.initial_rows = 24
 config.window_decorations = "RESIZE"
 
 config.window_padding = {
