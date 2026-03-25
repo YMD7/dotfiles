@@ -65,7 +65,20 @@ fi
 command -v ssh-add &>/dev/null && ssh-add --apple-load-keychain 2>/dev/null
 
 # --- direnv -------------------------------------------------------------------
-command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
+export DIRENV_LOG_FORMAT=""
+if command -v direnv &>/dev/null; then
+  eval "$(direnv hook zsh)"
+  functions[_direnv_hook_orig]=$functions[_direnv_hook]
+  _direnv_hook() {
+    local prev_dir="$DIRENV_DIR"
+    _direnv_hook_orig
+    if [[ -z "$prev_dir" && -n "$DIRENV_DIR" ]]; then
+      echo "🚚 direnv loaded"
+    elif [[ -n "$prev_dir" && -z "$DIRENV_DIR" ]]; then
+      echo "👋 direnv unloaded"
+    fi
+  }
+fi
 
 # --- Editor -------------------------------------------------------------------
 export EDITOR="nvim"
