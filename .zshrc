@@ -55,6 +55,9 @@ if [[ -d "$HOME/.local/share/pnpm" ]]; then
   esac
 fi
 
+# --- libpq (PostgreSQL client, keg-only) -------------------------------------
+[[ -d "/opt/homebrew/opt/libpq/bin" ]] && export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
 # --- Local bin ----------------------------------------------------------------
 [[ -d "$HOME/.local/bin" ]] && export PATH="$HOME/.local/bin:$PATH"
 

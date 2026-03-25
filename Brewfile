@@ -35,6 +35,9 @@ brew "tmux"             # terminal multiplexer — sessions, windows, panes
 # GitHub
 brew "gh"               # GitHub CLI — PR, issue, repo management
 
+# Database
+brew "libpq"            # PostgreSQL client tools — psql, pg_dump (no server)
+
 # Fun
 brew "cowsay"
 brew "lolcat"
