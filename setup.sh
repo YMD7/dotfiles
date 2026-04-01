@@ -66,4 +66,19 @@ else
   echo "Copilot.vim already installed."
 fi
 
+# ---------- 6. Claude Code ----------
+if ! command -v claude &>/dev/null; then
+  echo "Installing Claude Code..."
+  curl -fsSL https://claude.ai/install.sh | bash
+else
+  echo "Claude Code already installed."
+fi
+
+# ---------- 7. Remote development (optional) ----------
+echo ""
+read -p "Set up this Mac as a remote dev machine (SSH/mosh)? [y/N] " answer
+if [[ "${answer:-N}" =~ ^[Yy]$ ]]; then
+  bash "$DOTFILES_DIR/setup-remote-dev.sh"
+fi
+
 echo "Done!"
