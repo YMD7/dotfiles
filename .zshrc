@@ -94,6 +94,9 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 
 # --- Aliases ------------------------------------------------------------------
+# Shell
+alias rsh='exec $SHELL -l'
+
 # Git
 alias co='git checkout'
 
