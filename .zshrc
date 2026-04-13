@@ -67,6 +67,12 @@ fi
 # --- ssh agent (macOS) --------------------------------------------------------
 command -v ssh-add &>/dev/null && ssh-add --apple-load-keychain 2>/dev/null
 
+# SSH切断後にマウストラッキングのエスケープシーケンスをリセット
+ssh() {
+  command ssh "$@"
+  printf '\e[?1000l\e[?1002l\e[?1003l\e[?1006l\e[?1015l'
+}
+
 # --- direnv -------------------------------------------------------------------
 export DIRENV_LOG_FORMAT=""
 if command -v direnv &>/dev/null; then
