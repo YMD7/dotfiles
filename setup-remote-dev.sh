@@ -34,7 +34,22 @@ else
   echo "Warning: mosh-server not found at $MOSH_SERVER — skipping firewall config."
 fi
 
-# ---------- 4. Power management ----------
+# ---------- 4. Cloudflare Tunnel ----------
+echo "Configuring Cloudflare Tunnel..."
+if command -v cloudflared &>/dev/null; then
+  if [ -f "$HOME/.cloudflared/config.yml" ]; then
+    sudo cloudflared service install
+    echo "Cloudflare Tunnel service installed."
+  else
+    echo "Warning: ~/.cloudflared/config.yml not found."
+    echo "Run 'cloudflared tunnel login' and create a tunnel first."
+    echo "See README.md for manual setup steps."
+  fi
+else
+  echo "Warning: cloudflared not found — skipping tunnel setup."
+fi
+
+# ---------- 5. Power management ----------
 echo "Configuring power management..."
 sudo pmset -a sleep 0
 sudo pmset -a disablesleep 1
@@ -45,7 +60,7 @@ sudo pmset -a tcpkeepalive 1
 sudo pmset -a hibernatemode 0
 echo "Power management configured."
 
-# ---------- 5. Verification ----------
+# ---------- 6. Verification ----------
 echo ""
 echo "=== Verification ==="
 echo ""
@@ -57,10 +72,15 @@ if [ -x "$MOSH_SERVER" ]; then
   sudo "$FIREWALL_CMD" --getappblocked "$MOSH_SERVER"
 fi
 echo ""
+echo "--- Cloudflare Tunnel ---"
+if command -v cloudflared &>/dev/null; then
+  sudo launchctl list | grep cloudflared || echo "Service not registered"
+fi
+echo ""
 echo "--- Power Management ---"
 pmset -g | grep -E "sleep|displaysleep|disablesleep|womp|powernap|tcpkeepalive|hibernatemode"
 
-# ---------- 6. Done ----------
+# ---------- 7. Done ----------
 echo ""
 echo "Remote development setup complete."
 echo "Connect via:"
