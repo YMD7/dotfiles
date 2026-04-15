@@ -35,18 +35,40 @@ else
 fi
 
 # ---------- 4. Cloudflare Tunnel ----------
+# cloudflared service install が生成する LaunchDaemon の plist には
+# tunnel run サブコマンドや --config パスが含まれないため、
+# サービス登録後に plist を修正して正しい引数を設定する。
+#
+# 前提: cloudflared tunnel login / create / route dns を事前に実行済みであること。
+#       ~/.cloudflared/config.yml にトンネル設定が記載されていること。
+#       手順は README.md の「Cloudflare Tunnel」セクションを参照。
+CLOUDFLARED_PLIST="/Library/LaunchDaemons/com.cloudflare.cloudflared.plist"
+CLOUDFLARED_CONFIG="$HOME/.cloudflared/config.yml"
+
 echo "Configuring Cloudflare Tunnel..."
-if command -v cloudflared &>/dev/null; then
-  if [ -f "$HOME/.cloudflared/config.yml" ]; then
-    sudo cloudflared service install
-    echo "Cloudflare Tunnel service installed."
-  else
-    echo "Warning: ~/.cloudflared/config.yml not found."
-    echo "Run 'cloudflared tunnel login' and create a tunnel first."
-    echo "See README.md for manual setup steps."
-  fi
-else
+if ! command -v cloudflared &>/dev/null; then
   echo "Warning: cloudflared not found — skipping tunnel setup."
+elif [ ! -f "$CLOUDFLARED_CONFIG" ]; then
+  echo "Warning: $CLOUDFLARED_CONFIG not found."
+  echo "Run 'cloudflared tunnel login' and create a tunnel first."
+  echo "See README.md for manual setup steps."
+elif [ -f "$CLOUDFLARED_PLIST" ]; then
+  echo "Cloudflare Tunnel service already installed."
+else
+  sudo cloudflared service install
+
+  # plist を修正: tunnel run --config <path> を引数に追加
+  sudo /usr/libexec/PlistBuddy -c "Delete :ProgramArguments" "$CLOUDFLARED_PLIST"
+  sudo /usr/libexec/PlistBuddy -c "Add :ProgramArguments array" "$CLOUDFLARED_PLIST"
+  sudo /usr/libexec/PlistBuddy -c "Add :ProgramArguments:0 string /opt/homebrew/bin/cloudflared" "$CLOUDFLARED_PLIST"
+  sudo /usr/libexec/PlistBuddy -c "Add :ProgramArguments:1 string tunnel" "$CLOUDFLARED_PLIST"
+  sudo /usr/libexec/PlistBuddy -c "Add :ProgramArguments:2 string --config" "$CLOUDFLARED_PLIST"
+  sudo /usr/libexec/PlistBuddy -c "Add :ProgramArguments:3 string $CLOUDFLARED_CONFIG" "$CLOUDFLARED_PLIST"
+  sudo /usr/libexec/PlistBuddy -c "Add :ProgramArguments:4 string run" "$CLOUDFLARED_PLIST"
+
+  sudo launchctl unload "$CLOUDFLARED_PLIST"
+  sudo launchctl load "$CLOUDFLARED_PLIST"
+  echo "Cloudflare Tunnel service installed and configured."
 fi
 
 # ---------- 5. Power management ----------
@@ -75,6 +97,9 @@ echo ""
 echo "--- Cloudflare Tunnel ---"
 if command -v cloudflared &>/dev/null; then
   sudo launchctl list | grep cloudflared || echo "Service not registered"
+  if [ -f "$CLOUDFLARED_PLIST" ]; then
+    echo "Config path: $(/usr/libexec/PlistBuddy -c "Print :ProgramArguments:3" "$CLOUDFLARED_PLIST" 2>/dev/null || echo "not set")"
+  fi
 fi
 echo ""
 echo "--- Power Management ---"
