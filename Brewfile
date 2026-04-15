@@ -31,6 +31,7 @@ brew "neovim"           # Vim-fork — extensible text editor
 # Network
 brew "mosh"             # mobile shell — roaming & intermittent SSH
 brew "tmux"             # terminal multiplexer — sessions, windows, panes
+brew "cloudflared"      # Cloudflare Tunnel — secure tunnel to localhost
 
 # GitHub
 brew "gh"               # GitHub CLI — PR, issue, repo management
