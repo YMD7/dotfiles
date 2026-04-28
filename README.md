@@ -45,6 +45,16 @@ bash setup.sh
 | `~/.claude/statusline.sh` | `.claude/statusline.sh`          |
 | `~/.local/bin/tmux-ai-title` | `bin/tmux-ai-title`           |
 
+## Container (colima)
+
+`colima` と `docker` CLI は Brewfile で導入されるが、初回は手動で VM を起動する必要がある:
+
+```sh
+colima start --cpu 4 --memory 8 --disk 100
+```
+
+リソース割り当ては用途に応じて調整。停止は `colima stop`、設定変更は再起動が必要。
+
 ## Cloudflare Tunnel（リモートアクセス）
 
 `setup-remote-dev.sh` でサービス登録まで自動化されるが、初回はトンネルの作成と Cloudflare Access の設定が必要。

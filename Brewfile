@@ -36,6 +36,10 @@ brew "cloudflared"      # Cloudflare Tunnel — secure tunnel to localhost
 # GitHub
 brew "gh"               # GitHub CLI — PR, issue, repo management
 
+# Container
+brew "colima"           # container runtime — Docker Desktop alternative (Lima VM)
+brew "docker"           # Docker CLI — connects to colima's daemon
+
 # Database
 brew "libpq"            # PostgreSQL client tools — psql, pg_dump (no server)
 
