@@ -15,21 +15,16 @@
   "enabledPlugins": {
     "vtsls@claude-code-lsps": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
-    "frontend-design@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true
+  },
+  "skillOverrides": {
+    "web-design-guidelines": "off"
   },
   "extraKnownMarketplaces": {
     "claude-code-lsps": {
       "source": {
         "source": "github",
         "repo": "boostvolt/claude-code-lsps"
-      }
-    },
-    "claude-code-plugins": {
-      "source": {
-        "source": "github",
-        "repo": "anthropics/claude-code"
       }
     }
   },
