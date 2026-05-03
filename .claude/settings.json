@@ -7,6 +7,9 @@
     "defaultMode": "bypassPermissions",
     "disableAutoMode": "disable"
   },
+  "skillOverrides": {
+    "web-design-guidelines": "off"
+  },
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh",
@@ -16,9 +19,6 @@
     "vtsls@claude-code-lsps": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true
-  },
-  "skillOverrides": {
-    "web-design-guidelines": "off"
   },
   "extraKnownMarketplaces": {
     "claude-code-lsps": {
@@ -30,5 +30,6 @@
   },
   "effortLevel": "xhigh",
   "skipDangerousModePermissionPrompt": true,
-  "remoteControlAtStartup": false
+  "remoteControlAtStartup": false,
+  "model": "sonnet"
 }
