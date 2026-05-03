@@ -26,7 +26,7 @@ font-family = Bizin Gothic NF
 font-family = Osaka
 font-family = Apple Color Emoji
 
-font-size = 13.5
+font-size = 14.0
 
 # window-padding-x = 2
 #
@@ -54,3 +54,5 @@ font-size = 13.5
 unfocused-split-opacity = 0.5
 
 keybind = global:cmd+shift+0=toggle_quick_terminal
+
+theme = Kiro Dark
