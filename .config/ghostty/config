@@ -54,5 +54,6 @@ font-size = 14.0
 unfocused-split-opacity = 0.5
 
 keybind = global:cmd+shift+0=toggle_quick_terminal
+keybind = cmd+k=text:\x0c
 
 theme = Kiro Dark
