@@ -74,7 +74,19 @@ else
   echo "Claude Code already installed."
 fi
 
-# ---------- 7. Remote development (optional) ----------
+# ---------- 7. Tailscale system daemon ----------
+if [ ! -f /Library/LaunchDaemons/com.tailscale.tailscaled.plist ]; then
+  echo ""
+  read -p "Install tailscaled as a system daemon (recommended for non-server Macs)? [y/N] " answer
+  if [[ "${answer:-N}" =~ ^[Yy]$ ]]; then
+    sudo "$HOMEBREW_PREFIX/bin/tailscaled" install-system-daemon
+    echo "Daemon installed. Run 'sudo tailscale up' to authenticate."
+  fi
+else
+  echo "tailscaled system daemon already installed."
+fi
+
+# ---------- 8. Remote development (optional) ----------
 echo ""
 read -p "Set up this Mac as a remote dev machine (SSH/mosh)? [y/N] " answer
 if [[ "${answer:-N}" =~ ^[Yy]$ ]]; then

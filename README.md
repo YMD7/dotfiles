@@ -98,6 +98,61 @@ https://one.dash.cloudflare.com で以下を設定:
 
 設定後、ブラウザで `https://ssh.<ドメイン名>` にアクセスすると、Google 認証を経てブラウザ上で SSH ターミナルが使える。
 
+## Tailscale（VPN）
+
+MacBook 等の実機では **`tailscaled` daemon モード** で稼働させる。macOS GUI 版（App Store / Standalone）はコンソールユーザーのログアウト判定（画面ロック・Fast User Switching 等）に追従して停止してしまうため、家族と PC 共有する用途では実用に耐えん。daemon は root LaunchDaemon として動くんで、ユーザーセッションに依存せず常時稼働する。
+
+### 初回セットアップ
+
+```sh
+# 1. CLI と daemon バイナリを導入（Brewfile 経由）
+brew install tailscale
+
+# 2. （GUI 版が入ってる場合）アンインストール
+#    - Finder で /Applications/Tailscale.app をゴミ箱へ
+#    - System Settings > VPN から Tailscale プロファイルを削除
+#    - System Settings > General > Login Items から Tailscale を外す
+
+# 3. システム daemon として登録（root 権限必要）
+sudo tailscaled install-system-daemon
+# /Library/LaunchDaemons/com.tailscale.tailscaled.plist が作られ、即座に起動する
+
+# 4. ログイン認証（標準出力に出る URL をブラウザで開いて認証）
+sudo tailscale up
+```
+
+### 日常操作
+
+```sh
+tailscale status              # 接続状態（peer 一覧）
+tailscale ip                  # 自分の Tailscale IP
+sudo tailscale up             # 接続開始
+sudo tailscale down           # 切断（daemon は起動継続）
+sudo tailscale logout         # 完全ログアウト（再認証必要）
+tailscale ping <peer>         # peer への到達確認
+tailscale netcheck            # NAT・DERP 経路診断
+```
+
+### daemon 管理
+
+```sh
+# 状態確認
+sudo launchctl print system/com.tailscale.tailscaled | head
+
+# 再起動（設定変更後など）
+sudo launchctl kickstart -k system/com.tailscale.tailscaled
+
+# アンインストール
+sudo tailscaled uninstall-system-daemon
+```
+
+### アップデート
+
+```sh
+brew upgrade tailscale
+sudo launchctl kickstart -k system/com.tailscale.tailscaled
+```
+
 ## tmux AI タイトル
 
 tmux のステータスライン右側に、現在の作業内容を AI が自動生成したタイトルとして表示する。

@@ -32,6 +32,7 @@ brew "neovim"           # Vim-fork — extensible text editor
 brew "mosh"             # mobile shell — roaming & intermittent SSH
 brew "tmux"             # terminal multiplexer — sessions, windows, panes
 brew "cloudflared"      # Cloudflare Tunnel — secure tunnel to localhost
+brew "tailscale"        # WireGuard mesh VPN — daemon mode (sudo tailscaled install-system-daemon)
 
 # GitHub
 brew "gh"               # GitHub CLI — PR, issue, repo management
