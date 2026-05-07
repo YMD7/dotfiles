@@ -7,6 +7,7 @@
     "defaultMode": "bypassPermissions",
     "disableAutoMode": "disable"
   },
+  "model": "sonnet",
   "skillOverrides": {
     "web-design-guidelines": "off"
   },
@@ -30,6 +31,5 @@
   },
   "effortLevel": "xhigh",
   "skipDangerousModePermissionPrompt": true,
-  "remoteControlAtStartup": false,
-  "model": "sonnet"
+  "remoteControlAtStartup": false
 }

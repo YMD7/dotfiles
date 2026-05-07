@@ -20,8 +20,9 @@ bash setup.sh
 1. Homebrew のインストール（未導入の場合）
 2. `brew bundle` で依存パッケージをインストール
 3. シンボリックリンクの一括作成
-4. mise によるランタイム（Node.js, Python, Ruby）のインストール
-5. Copilot.vim のクローン（未導入の場合）
+4. Colima LaunchAgent の登録
+5. mise によるランタイム（Node.js, Python, Ruby）のインストール
+6. Copilot.vim のクローン（未導入の場合）
 
 ## シンボリックリンク一覧
 
@@ -44,16 +45,23 @@ bash setup.sh
 | `~/.claude/settings.json` | `.claude/settings.json`          |
 | `~/.claude/statusline.sh` | `.claude/statusline.sh`          |
 | `~/.local/bin/tmux-ai-title` | `bin/tmux-ai-title`           |
+| `~/Library/LaunchAgents/com.ymd7.colima.plist` | `LaunchAgents/com.ymd7.colima.plist` |
 
 ## Container (colima)
 
-`colima` と `docker` CLI は Brewfile で導入されるが、初回は手動で VM を起動する必要がある:
+`colima` と `docker` CLI は Brewfile で導入される。`setup.sh` は LaunchAgent を登録し、ログイン時に Colima を自動起動する:
+
+```sh
+launchctl print gui/$(id -u)/com.ymd7.colima
+```
+
+LaunchAgent は以下の設定で `colima start` を実行する:
 
 ```sh
 colima start --cpu 4 --memory 8 --disk 100
 ```
 
-リソース割り当ては用途に応じて調整。停止は `colima stop`、設定変更は再起動が必要。
+リソース割り当ては `LaunchAgents/com.ymd7.colima.plist` を編集して調整する。停止は `colima stop`、設定変更は再起動が必要。
 
 ## Cloudflare Tunnel（リモートアクセス）
 

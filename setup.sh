@@ -37,6 +37,7 @@ declare -a links=(
   ".claude/settings.json         : $HOME/.claude/settings.json"
   ".claude/statusline.sh         : $HOME/.claude/statusline.sh"
   "bin/tmux-ai-title             : $HOME/.local/bin/tmux-ai-title"
+  "LaunchAgents/com.ymd7.colima.plist : $HOME/Library/LaunchAgents/com.ymd7.colima.plist"
   "AGENTS.md                      : $HOME/CLAUDE.md"
   "AGENTS.md                      : $HOME/.codex/AGENTS.md"
   "AGENTS.md                      : $HOME/.gemini/GEMINI.md"
@@ -51,12 +52,25 @@ for entry in "${links[@]}"; do
   ln -sfn "$DOTFILES_DIR/$src" "$dest"
 done
 
-# ---------- 4. mise install ----------
+# ---------- 4. Colima LaunchAgent ----------
+echo "Loading Colima LaunchAgent..."
+COLIMA_AGENT_LABEL="com.ymd7.colima"
+COLIMA_AGENT_PLIST="$HOME/Library/LaunchAgents/$COLIMA_AGENT_LABEL.plist"
+COLIMA_AGENT_DOMAIN="gui/$(id -u)"
+
+if launchctl print "$COLIMA_AGENT_DOMAIN/$COLIMA_AGENT_LABEL" &>/dev/null; then
+  launchctl bootout "$COLIMA_AGENT_DOMAIN/$COLIMA_AGENT_LABEL"
+fi
+
+launchctl bootstrap "$COLIMA_AGENT_DOMAIN" "$COLIMA_AGENT_PLIST"
+launchctl enable "$COLIMA_AGENT_DOMAIN/$COLIMA_AGENT_LABEL"
+
+# ---------- 5. mise install ----------
 echo "Installing runtimes via mise..."
 eval "$("$HOMEBREW_PREFIX/bin/mise" activate bash)"
 mise install
 
-# ---------- 5. Neovim plugins ----------
+# ---------- 6. Neovim plugins ----------
 COPILOT_DIR="$HOME/.config/nvim/pack/github/start/copilot.vim"
 if [ ! -d "$COPILOT_DIR" ]; then
   echo "Cloning Copilot.vim..."
@@ -66,7 +80,7 @@ else
   echo "Copilot.vim already installed."
 fi
 
-# ---------- 6. Claude Code ----------
+# ---------- 7. Claude Code ----------
 if ! command -v claude &>/dev/null; then
   echo "Installing Claude Code..."
   curl -fsSL https://claude.ai/install.sh | bash
@@ -74,7 +88,7 @@ else
   echo "Claude Code already installed."
 fi
 
-# ---------- 7. Tailscale system daemon ----------
+# ---------- 8. Tailscale system daemon ----------
 if [ ! -f /Library/LaunchDaemons/com.tailscale.tailscaled.plist ]; then
   echo ""
   read -p "Install tailscaled as a system daemon (recommended for non-server Macs)? [y/N] " answer
@@ -86,7 +100,7 @@ else
   echo "tailscaled system daemon already installed."
 fi
 
-# ---------- 8. Remote development (optional) ----------
+# ---------- 9. Remote development (optional) ----------
 echo ""
 read -p "Set up this Mac as a remote dev machine (SSH/mosh)? [y/N] " answer
 if [[ "${answer:-N}" =~ ^[Yy]$ ]]; then
