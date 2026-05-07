@@ -36,6 +36,7 @@ declare -a links=(
   ".claude/skills                : $HOME/.claude/skills"
   ".claude/settings.json         : $HOME/.claude/settings.json"
   ".claude/statusline.sh         : $HOME/.claude/statusline.sh"
+  ".codex/config.toml            : $HOME/.codex/config.toml"
   "bin/tmux-ai-title             : $HOME/.local/bin/tmux-ai-title"
   "LaunchAgents/com.ymd7.colima.plist : $HOME/Library/LaunchAgents/com.ymd7.colima.plist"
   "AGENTS.md                      : $HOME/CLAUDE.md"
