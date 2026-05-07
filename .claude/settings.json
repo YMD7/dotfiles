@@ -4,10 +4,8 @@
     "ENABLE_TOOL_SEARCH": "auto:3"
   },
   "permissions": {
-    "defaultMode": "bypassPermissions",
-    "disableAutoMode": "disable"
+    "defaultMode": "auto"
   },
-  "model": "sonnet",
   "skillOverrides": {
     "web-design-guidelines": "off"
   },
@@ -29,7 +27,8 @@
       }
     }
   },
-  "effortLevel": "xhigh",
+  "effortLevel": "high",
   "skipDangerousModePermissionPrompt": true,
-  "remoteControlAtStartup": false
+  "remoteControlAtStartup": false,
+  "skipAutoPermissionPrompt": true
 }
