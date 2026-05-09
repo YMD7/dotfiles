@@ -44,7 +44,6 @@ bash setup.sh
 | `~/.claude/skills/`       | `.claude/skills/`                |
 | `~/.claude/settings.json` | `.claude/settings.json`          |
 | `~/.claude/statusline.sh` | `.claude/statusline.sh`          |
-| `~/.local/bin/tmux-ai-title` | `bin/tmux-ai-title`           |
 | `~/Library/LaunchAgents/com.ymd7.colima.plist` | `LaunchAgents/com.ymd7.colima.plist` |
 
 ## Container (colima)
@@ -160,11 +159,3 @@ sudo tailscaled uninstall-system-daemon
 brew upgrade tailscale
 sudo launchctl kickstart -k system/com.tailscale.tailscaled
 ```
-
-## tmux AI タイトル
-
-tmux のステータスライン右側に、現在の作業内容を AI が自動生成したタイトルとして表示する。
-
-- **仕組み**: 3分おきにバックグラウンドで `claude` CLI (haiku) を呼び出し、ターミナルのコンテキスト（cwd、git 情報、画面内容、シェル履歴）からタイトルを生成
-- **キャッシュ**: `~/.cache/tmux-ai-title/<セッション名>` にセッションごとに保存。ステータスライン表示時はキャッシュ読みのみなので遅延なし
-- **前提**: `claude` CLI がインストールされていること
