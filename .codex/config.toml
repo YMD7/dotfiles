@@ -1,12 +1,13 @@
 model = "gpt-5.5"
-model_reasoning_effort = "high"
+model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"
 approval_policy = "on-request"
 approvals_reviewer = "auto_review"
 web_search = "cached"
+service_tier = "fast"
 
 [features]
-codex_hooks = true
+hooks = true
 
 [sandbox_workspace_write]
 network_access = false
@@ -46,6 +47,12 @@ trust_level = "trusted"
 [projects."/Users/kyo/Dev/butty"]
 trust_level = "trusted"
 
+[projects."/Users/kyo"]
+trust_level = "trusted"
+
+[notice]
+hide_rate_limit_model_nudge = true
+
 [notice.model_migrations]
 "gpt-5.3-codex" = "gpt-5.4"
 
@@ -74,3 +81,9 @@ status_line = [
 
 [plugins."github@openai-curated"]
 enabled = true
+
+[hooks.state]
+
+[hooks.state."/Users/kyo/Dev/butty/.codex/hooks.json:pre_tool_use:0:0"]
+enabled = true
+trusted_hash = "sha256:6a6e8f11fd7f3a312088903e7959579c01c83cff17fad224475f20ec09ae4b02"
