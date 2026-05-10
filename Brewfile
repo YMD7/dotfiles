@@ -51,6 +51,9 @@ brew "lolcat"
 # Fonts
 cask "font-hack-nerd-font"
 
+# Security
+cask "1password-cli"     # 1Password CLI — command-line secret access
+
 # Apps
 cask "codex"            # OpenAI Codex — AI coding agent
 cask "google-chrome@canary"  # Chrome Canary — dev/testing browser
