@@ -18,12 +18,14 @@ CWD=$(echo "$input" | jq -r '.workspace.current_dir')
 DIR_NAME="/"$(basename "$CWD")
 
 # Git branch
-GIT_BRANCH=$(git --git-dir="$CWD/.git" --work-tree="$CWD" rev-parse --abbrev-ref HEAD 2>/dev/null)
+# --no-optional-locks: skip index.lock acquisition for read-only ops to avoid
+# racing with concurrent git invocations from the user (e.g. git add / commit).
+GIT_BRANCH=$(git --no-optional-locks --git-dir="$CWD/.git" --work-tree="$CWD" rev-parse --abbrev-ref HEAD 2>/dev/null)
 
 # Git status indicators
 GIT_STATUS=""
 if [ -n "$GIT_BRANCH" ]; then
-  GIT_RAW=$(git --git-dir="$CWD/.git" --work-tree="$CWD" status --porcelain -b 2>/dev/null)
+  GIT_RAW=$(git --no-optional-locks --git-dir="$CWD/.git" --work-tree="$CWD" status --porcelain -b 2>/dev/null)
   # Ahead/behind
   AHEAD=$(echo "$GIT_RAW" | head -1 | sed -n 's/.*ahead \([0-9]*\).*/\1/p')
   BEHIND=$(echo "$GIT_RAW" | head -1 | sed -n 's/.*behind \([0-9]*\).*/\1/p')
