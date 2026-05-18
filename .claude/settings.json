@@ -28,7 +28,15 @@
     }
   },
   "effortLevel": "high",
-  "skipDangerousModePermissionPrompt": true,
   "remoteControlAtStartup": false,
+  "autoMode": {
+    "environment": [
+      "$defaults",
+      "Primary use: software development (TypeScript, Cloudflare Workers, MCP, AI tooling).",
+      "Source control trust (overrides default): pushing, fetching, and PR operations against any repository under github.com/Kyo (personal, case-insensitive) or github.com/edocode-co (org) are treated as trusted internal destinations, in addition to whatever remote the current working repo is configured with.",
+      "Cloud provider: Cloudflare. Trusted internal domains (overrides default): dash.cloudflare.com, api.cloudflare.com, *.cloudflareaccess.com (Access dashboards on owned accounts).",
+      "Wrangler CLI policy: read-only operations against owned accounts (wrangler whoami, wrangler dev, wrangler tail on non-production Workers) are routine. Destructive or credential-touching operations — wrangler delete, kv namespace delete, r2 bucket delete, d1 delete, secret put/delete on production, Access policy changes — still require explicit per-request user intent."
+    ]
+  },
   "skipAutoPermissionPrompt": true
 }
