@@ -1,16 +1,45 @@
 model = "gpt-5.5"
-model_reasoning_effort = "medium"
+model_reasoning_effort = "high"
 sandbox_mode = "workspace-write"
 approval_policy = "on-request"
 approvals_reviewer = "auto_review"
 web_search = "cached"
-service_tier = "fast"
 
 [features]
 hooks = true
 
 [sandbox_workspace_write]
 network_access = false
+
+[profiles.cloudflare-op]
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+approvals_reviewer = "auto_review"
+allow_login_shell = false
+web_search = "cached"
+
+[profiles.cloudflare-op.sandbox_workspace_write]
+network_access = true
+
+[profiles.cloudflare-op.shell_environment_policy]
+inherit = "core"
+ignore_default_excludes = true
+include_only = [
+  "HOME",
+  "PATH",
+  "PNPM_HOME",
+  "TMPDIR",
+  "USER",
+  "XDG_CACHE_HOME",
+  "XDG_CONFIG_HOME",
+  "XDG_DATA_HOME",
+  "__CF_USER_TEXT_ENCODING",
+  "OP_SERVICE_ACCOUNT_TOKEN",
+]
+exclude = [
+  "OP_CONNECT_HOST",
+  "OP_CONNECT_TOKEN",
+]
 
 [auto_review]
 policy = """
@@ -27,6 +56,27 @@ Allow normal project-local development work.
 Allow GitHub/GitLab-related development network actions when the command intent
 is clear, such as git fetch, git pull, git push, gh pr/issue/check commands, and
 glab equivalents.
+
+Allow Butty Cloudflare tooling secret injection only when all conditions hold:
+- Codex is launched with the `cloudflare-op` profile and the command is scoped
+  to the active Butty worktree
+- `OP_SERVICE_ACCOUNT_TOKEN` is inherited from the parent process, never read
+  from Keychain, `.env`, shell history, or command substitution
+- `OP_CONNECT_HOST` and `OP_CONNECT_TOKEN` are absent
+- 1Password access is via `op run --env-file=infra/cloudflare/.env.*.template
+  -- pnpm cf:*` or the repository wrapper `pnpm cf:op:run --template
+  <purpose> -- pnpm cf:*`
+- the template path is under `infra/cloudflare/`, the purpose is `auth-check`,
+  `deploy`, `logs`, or `smoke-debug-admin`, and output remains redacted
+  JSON/audit output
+- the command does not print environment variables, read raw secret values,
+  write plaintext `.env.local` fallbacks, or pass secret values on the command
+  line
+
+Allow 1Password item scaffolding only for non-secret metadata in vault
+`butty-dev` and item names prefixed with `cloudflare-`; secret field values
+must be entered by a human in 1Password or injected by `op run`, not included
+in shell commands or logs.
 """
 
 [profiles.net]
@@ -50,8 +100,12 @@ trust_level = "trusted"
 [projects."/Users/kyo"]
 trust_level = "trusted"
 
+[projects."/Users/kyo/Dev/claude-plugins"]
+trust_level = "trusted"
+
 [notice]
 hide_rate_limit_model_nudge = true
+fast_default_opt_out = true
 
 [notice.model_migrations]
 "gpt-5.3-codex" = "gpt-5.4"
