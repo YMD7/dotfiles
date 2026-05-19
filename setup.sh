@@ -57,9 +57,21 @@ echo "Loading Colima LaunchAgent..."
 COLIMA_AGENT_LABEL="com.ymd7.colima"
 COLIMA_AGENT_PLIST="$HOME/Library/LaunchAgents/$COLIMA_AGENT_LABEL.plist"
 COLIMA_AGENT_DOMAIN="gui/$(id -u)"
+LEGACY_COLIMA_AGENT_LABEL="com.colima.default"
+LEGACY_COLIMA_AGENT_PLIST="$HOME/Library/LaunchAgents/$LEGACY_COLIMA_AGENT_LABEL.plist"
 
 if launchctl print "$COLIMA_AGENT_DOMAIN/$COLIMA_AGENT_LABEL" &>/dev/null; then
   launchctl bootout "$COLIMA_AGENT_DOMAIN/$COLIMA_AGENT_LABEL"
+fi
+
+if launchctl print "$COLIMA_AGENT_DOMAIN/$LEGACY_COLIMA_AGENT_LABEL" &>/dev/null; then
+  launchctl bootout "$COLIMA_AGENT_DOMAIN/$LEGACY_COLIMA_AGENT_LABEL"
+fi
+
+if [ -e "$LEGACY_COLIMA_AGENT_PLIST" ]; then
+  legacy_backup="$LEGACY_COLIMA_AGENT_PLIST.disabled.$(date +%Y%m%d%H%M%S)"
+  mv "$LEGACY_COLIMA_AGENT_PLIST" "$legacy_backup"
+  echo "Moved legacy Colima LaunchAgent to $legacy_backup"
 fi
 
 launchctl bootstrap "$COLIMA_AGENT_DOMAIN" "$COLIMA_AGENT_PLIST"

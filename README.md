@@ -57,10 +57,10 @@ launchctl print gui/$(id -u)/com.ymd7.colima
 LaunchAgent は以下の設定で `colima start` を実行する:
 
 ```sh
-colima start --cpu 4 --memory 8 --disk 100
+colima start --profile default
 ```
 
-リソース割り当ては `LaunchAgents/com.ymd7.colima.plist` を編集して調整する。停止は `colima stop`、設定変更は再起動が必要。
+リソース割り当ては Colima の `default` プロファイル設定で管理する。停止は `colima stop`、設定変更は再起動が必要。
 
 ## Cloudflare Tunnel（リモートアクセス）
 

@@ -9,13 +9,19 @@
 	<array>
 		<string>/opt/homebrew/bin/colima</string>
 		<string>start</string>
-		<string>--cpu</string>
-		<string>4</string>
-		<string>--memory</string>
-		<string>8</string>
-		<string>--disk</string>
-		<string>100</string>
+		<string>--profile</string>
+		<string>default</string>
 	</array>
+
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>HOME</key>
+		<string>/Users/kyo</string>
+		<key>PATH</key>
+		<string>/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+		<key>XDG_CONFIG_HOME</key>
+		<string>/Users/kyo/.config</string>
+	</dict>
 
 	<key>RunAtLoad</key>
 	<true/>
