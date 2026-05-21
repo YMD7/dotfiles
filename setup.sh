@@ -36,7 +36,6 @@ declare -a links=(
   ".claude/skills                : $HOME/.claude/skills"
   ".claude/settings.json         : $HOME/.claude/settings.json"
   ".claude/statusline.sh         : $HOME/.claude/statusline.sh"
-  ".codex/user-config.toml       : $HOME/.codex/config.toml"
   "LaunchAgents/com.ymd7.colima.plist : $HOME/Library/LaunchAgents/com.ymd7.colima.plist"
   "AGENTS.md                      : $HOME/CLAUDE.md"
   "AGENTS.md                      : $HOME/.codex/AGENTS.md"
@@ -51,6 +50,58 @@ for entry in "${links[@]}"; do
   mkdir -p "$(dirname "$dest")"
   ln -sfn "$DOTFILES_DIR/$src" "$dest"
 done
+
+# ---------- 3.5. Codex config.toml (template-merge) ----------
+# シムリンクではなく、~/.codex/config.toml の管理ブロックだけを
+# .codex/config.toml.template の内容で差し替える方式。
+# 管理ブロック外（ルート直下のキー / [projects.*] / [hooks.state.*] 等）は温存する。
+echo "Syncing Codex shared config block..."
+CODEX_TEMPLATE="$DOTFILES_DIR/.codex/config.toml.template"
+CODEX_TARGET="$HOME/.codex/config.toml"
+CODEX_BEGIN="# >>> dotfiles:codex-shared (managed — do not edit between markers) >>>"
+CODEX_END="# <<< dotfiles:codex-shared <<<"
+
+mkdir -p "$(dirname "$CODEX_TARGET")"
+
+if [ ! -e "$CODEX_TARGET" ]; then
+  echo "  Initializing $CODEX_TARGET from template."
+  {
+    echo "$CODEX_BEGIN"
+    cat "$CODEX_TEMPLATE"
+    echo "$CODEX_END"
+  } > "$CODEX_TARGET"
+elif grep -qF "$CODEX_BEGIN" "$CODEX_TARGET" && grep -qF "$CODEX_END" "$CODEX_TARGET"; then
+  echo "  Updating managed block in $CODEX_TARGET."
+  codex_tmp="$(mktemp)"
+  awk -v begin="$CODEX_BEGIN" -v end="$CODEX_END" -v tplfile="$CODEX_TEMPLATE" '
+    BEGIN { inblock = 0 }
+    {
+      if (!inblock && index($0, begin) == 1) {
+        print begin
+        while ((getline line < tplfile) > 0) print line
+        close(tplfile)
+        inblock = 1
+        next
+      }
+      if (inblock && index($0, end) == 1) {
+        print end
+        inblock = 0
+        next
+      }
+      if (!inblock) print
+    }
+  ' "$CODEX_TARGET" > "$codex_tmp"
+  mv "$codex_tmp" "$CODEX_TARGET"
+else
+  echo ""
+  echo "  WARNING: $CODEX_TARGET exists without dotfiles markers."
+  echo "  Wrap the template block manually:"
+  echo "    $CODEX_BEGIN"
+  echo "    ... insert contents of $CODEX_TEMPLATE ..."
+  echo "    $CODEX_END"
+  echo "  After that, re-run setup.sh to enable automated updates."
+  echo "  (Skipping Codex config sync this run.)"
+fi
 
 # ---------- 4. Colima LaunchAgent ----------
 echo "Loading Colima LaunchAgent..."

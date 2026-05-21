@@ -1,0 +1,64 @@
+[features]
+hooks = true
+
+[sandbox_workspace_write]
+network_access = false
+
+[auto_review]
+policy = """
+Deny requests that:
+- delete broad filesystem targets such as /, ~, $HOME, .., .git, or large glob
+patterns
+- modify files outside the current project unless explicitly requested
+- bypass security hooks or checks, including --no-verify, core.hooksPath changes,
+or disabling hook tools
+- print, copy, upload, or exfiltrate secrets
+- run network access to unknown hosts without clear user intent
+
+Allow normal project-local development work.
+Allow GitHub/GitLab-related development network actions when the command intent
+is clear, such as git fetch, git pull, git push, gh pr/issue/check commands, and
+glab equivalents.
+"""
+
+[profiles.net]
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+approvals_reviewer = "auto_review"
+
+[profiles.net.sandbox_workspace_write]
+network_access = true
+
+[profiles.readonly]
+sandbox_mode = "read-only"
+approval_policy = "never"
+
+[notice]
+hide_rate_limit_model_nudge = true
+fast_default_opt_out = true
+
+[notice.model_migrations]
+"gpt-5.3-codex" = "gpt-5.4"
+
+[model_providers.openai-cli]
+name = "OpenAI (CLI dev)"
+base_url = "https://api.openai.com/v1"
+wire_api = "responses"
+env_key = "CODEX_API_KEY"
+env_key_instructions = "Set CODEX_API_KEY env var (separate from Butty's OPENAI_API_KEY)"
+
+[profiles.api]
+model_provider = "openai-cli"
+
+[tui]
+status_line = [
+  "model-with-reasoning",
+  "project-root",
+  "context-remaining",
+  "git-branch",
+  "five-hour-limit",
+  "weekly-limit",
+]
+
+[plugins."github@openai-curated"]
+enabled = true
