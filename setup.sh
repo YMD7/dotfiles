@@ -51,6 +51,63 @@ for entry in "${links[@]}"; do
   ln -sfn "$DOTFILES_DIR/$src" "$dest"
 done
 
+# ---------- 3.1. SSH key ----------
+echo "Checking SSH key..."
+SSH_DIR="$HOME/.ssh"
+SSH_KEY="$SSH_DIR/id_ed25519"
+SSH_KEY_DISPLAY="~/.ssh/id_ed25519"
+
+print_ssh_config_template() {
+  cat <<EOF
+Add a host entry like this to $SSH_DIR/config when you want to use this key:
+
+Host <alias>
+  HostName <hostname-or-tailscale-ip>
+  User <remote-user>
+  IdentityFile $SSH_KEY_DISPLAY
+  AddKeysToAgent yes
+  UseKeychain yes
+
+Example:
+
+Host ymd
+  HostName 100.103.17.105
+  User kyo
+  IdentityFile $SSH_KEY_DISPLAY
+  AddKeysToAgent yes
+  UseKeychain yes
+EOF
+  echo ""
+}
+
+mkdir -p "$SSH_DIR"
+chmod 700 "$SSH_DIR"
+
+if [ -f "$SSH_KEY" ] && [ -f "$SSH_KEY.pub" ]; then
+  echo "SSH key already exists: $SSH_KEY"
+  print_ssh_config_template
+elif [ -e "$SSH_KEY" ] || [ -e "$SSH_KEY.pub" ]; then
+  echo "WARNING: SSH key files are incomplete."
+  echo "Expected both files:"
+  echo "  $SSH_KEY"
+  echo "  $SSH_KEY.pub"
+  echo "Skipping SSH key generation to avoid overwriting existing files."
+else
+  echo "SSH key not found: $SSH_KEY"
+  read -p "Create a new ed25519 SSH key for this machine? [y/N] " answer
+  if [[ "${answer:-N}" =~ ^[Yy]$ ]]; then
+    ssh-keygen -t ed25519 -f "$SSH_KEY" -C "$(whoami)@$(hostname)" -N ""
+    chmod 600 "$SSH_KEY"
+    chmod 644 "$SSH_KEY.pub"
+    echo "SSH key created: $SSH_KEY"
+    echo "Register this public key on remote machines when you want passwordless SSH:"
+    echo "  $SSH_KEY.pub"
+    print_ssh_config_template
+  else
+    echo "Skipping SSH key generation."
+  fi
+fi
+
 # ---------- 3.5. Codex config.toml (template-merge) ----------
 # シムリンクではなく、~/.codex/config.toml の管理ブロックだけを
 # .codex/config.toml.template の内容で差し替える方式。
