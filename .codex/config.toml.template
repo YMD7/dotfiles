@@ -19,6 +19,50 @@ Allow normal project-local development work.
 Allow GitHub/GitLab-related development network actions when the command intent
 is clear, such as git fetch, git pull, git push, gh pr/issue/check commands, and
 glab equivalents.
+
+Allow Butty Cloudflare tooling secret injection only when all conditions hold:
+- Codex is launched with the `cloudflare-op` profile and the command is scoped
+  to the active Butty worktree
+- `OP_SERVICE_ACCOUNT_TOKEN` is inherited from the parent process, never read
+  from Keychain, `.env`, shell history, or command substitution
+- `OP_CONNECT_HOST` and `OP_CONNECT_TOKEN` are absent
+- 1Password access is via `op run --env-file=infra/cloudflare/.env.*.template
+  -- pnpm cf:*` or the repository wrapper `pnpm cf:op:run --template
+  <purpose> -- pnpm cf:*`
+- the template path is under `infra/cloudflare/`, the purpose is `auth-check`,
+  `deploy`, `logs`, `smoke-debug-admin`, or `apns-preview`, and output remains
+  redacted JSON/audit output
+- `apns-preview` secret injection is limited to the repository wrapper
+    `pnpm cf:op:run --template apns-preview -- pnpm cf:apns-secrets:sync`,
+    preview environment only, and the repository allowlisted APNs runtime keys
+- the command does not print environment variables, read raw secret values,
+  write plaintext `.env.local` fallbacks, or pass secret values on the command
+  line
+
+Allow only:
+pnpm cf:op:run --template apns-preview -- pnpm cf:apns-secrets:sync
+
+When:
+- launched with `cloudflare-op` profile
+- cwd / --dir is inside `$HOME/Dev/butty`
+- template is `infra/cloudflare/.env.apns-preview.template`
+- `CLOUDFLARE_ENV=preview`
+- `BUTTY_CF_TEMPLATE_PURPOSE=apns-preview`
+- `BUTTY_CF_TOKEN_SCOPE=apns-preview-secret-sync`
+- destination is Cloudflare preview Worker only
+- written keys are exactly:
+  APNS_AUTH_KEY
+  APNS_KEY_ID
+  APNS_TEAM_ID
+  APNS_TOPIC
+  APNS_HOST
+- output is redacted JSON/audit output only
+- no raw env dump, no `.env.local` write, no command-line secret values
+
+Allow 1Password item scaffolding only for non-secret metadata in vault
+`butty-dev` and item names prefixed with `cloudflare-`; secret field values
+must be entered by a human in 1Password or injected by `op run`, not included
+in shell commands or logs.
 """
 
 [profiles.net]
