@@ -20,59 +20,20 @@ Allow GitHub/GitLab-related development network actions when the command intent
 is clear, such as git fetch, git pull, git push, gh pr/issue/check commands, and
 glab equivalents.
 
-Allow Butty Cloudflare tooling secret injection as a policy-managed capability,
-not as a wrapper-only or parent-env-only capability. Allow it only when all
-conditions hold:
-- the command is scoped to the active Butty worktree under `$HOME/Dev/butty`
-- `OP_CONNECT_HOST` and `OP_CONNECT_TOKEN` are absent
-- Service Account token resolution happens only through repository entrypoints
-  `pnpm cf:shell:check` or `pnpm cf:shell -- ...`; direct `op read`, arbitrary
-  command substitution, Keychain reads, shell history reads, and plaintext
-  `.env` reads remain denied
-- 1Password environment injection after that point is via
-  `pnpm cf:op:run --template <purpose> -- <allowlisted command>` or the
-  underlying `op run --env-file=infra/cloudflare/.env.*.template -- ...`
-- the template path is under `infra/cloudflare/`
-- output remains redacted JSON/audit output
-- the command does not print environment variables, read raw secret values,
-  write plaintext `.env.local` fallbacks, or pass secret values on the command
-  line
+Use 1Password MCP Server for Codex and 1Password Environments as the standard
+path for Butty AI-agent secret access. The agent may manage 1Password
+Environment metadata, variable names, and local mounted `.env` destinations, but
+must not request, print, copy, or return raw secret values. 1Password desktop app
+authorization must remain the human-controlled boundary.
 
-Allow read-only Cloudflare / Resend observability commands when the command
-matches one of:
-- `pnpm cf:shell:check`
-- `pnpm cf:shell -- pnpm cf:op:run --template auth-check -- pnpm cf:auth:check`
-- `pnpm cf:shell -- pnpm cf:op:run --template logs -- pnpm cf:logs:*`
-- `pnpm cf:shell -- pnpm cf:op:run --template resend-observability -- pnpm resend:logs:recent`
-
-Allow only this external-state-changing Cloudflare secret sync command:
-`pnpm cf:shell -- pnpm cf:op:run --template apns-preview -- pnpm cf:apns-secrets:sync`
-
-When:
-- cwd / --dir is inside `$HOME/Dev/butty`
-- template is `infra/cloudflare/.env.apns-preview.template`
-- `CLOUDFLARE_ENV=preview`
-- `BUTTY_CF_TEMPLATE_PURPOSE=apns-preview`
-- `BUTTY_CF_TOKEN_SCOPE=apns-preview-secret-sync`
-- destination is Cloudflare preview Worker only
-- written keys are exactly:
-  APNS_AUTH_KEY
-  APNS_KEY_ID
-  APNS_TEAM_ID
-  APNS_TOPIC
-  APNS_HOST
-- output is redacted JSON/audit output only
-- no raw env dump, no `.env.local` write, no command-line secret values
-
-Do not allow deploy, Worker secret writes, runtime secret sync, database origin
-reads, or other external-state-changing Cloudflare tooling under the read-only
-observability allowance. Those require a separate purpose-specific allowance and
-ad-hoc approval.
-
-Allow 1Password item scaffolding only for non-secret metadata in vault
-`butty-dev` and item names prefixed with `cloudflare-`; secret field values
-must be entered by a human in 1Password or injected by `op run`, not included
-in shell commands or logs.
+Treat Service Account based Cloudflare secret injection as legacy fallback, not
+the standard Codex path. Do not broaden local auto-review policy to pass
+`OP_SERVICE_ACCOUNT_TOKEN` into the Codex process, run arbitrary `op read`, dump
+environment variables, write plaintext `.env.local` fallbacks, or place secret
+values on command lines. If fallback is unavoidable, use the Cloudflare tooling
+runbook and ADR-0032; keep read-only observability separate from deploy,
+Worker secret writes, runtime secret sync, APNs secret sync, database origin
+reads, and other external-state-changing tooling.
 """
 
 [profiles.net]
