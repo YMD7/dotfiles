@@ -183,3 +183,5 @@ if command -v cowsay &>/dev/null && command -v lolcat &>/dev/null; then
   cowsay -f ${animals[$RANDOM % ${#animals[@]} + 1]} \
     "${messages[$RANDOM % ${#messages[@]} + 1]}" | lolcat
 fi
+# Qoder CLI
+alias qo='qodercli'
